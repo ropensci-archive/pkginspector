@@ -29,7 +29,8 @@ Imports:
     rstudioapi,
     functionMap,
     dplyr,
-    tidyr
+    tidyr,
+    igraph
 Suggests: 
     testthat,
     mockery,
