@@ -27,7 +27,9 @@ Imports:
     assertthat,
     httr,
     rstudioapi,
-    functionMap
+    functionMap,
+    dplyr,
+    tidyr
 Suggests: 
     testthat,
     mockery,
