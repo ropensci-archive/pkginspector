@@ -4,16 +4,18 @@
 \alias{rev_recursive}
 \title{Review recursive function calls}
 \usage{
-rev_recursive(igraph_obj)
+rev_recursive(path = ".", igraph_obj = NULL)
 }
 \arguments{
-\item{igraph_obj}{object returned by `create_package_igraph()`}
+\item{path}{package path}
+
+\item{igraph_obj}{igraph object for function calls dependencies returned by `create_package_igraph()`}
 }
 \value{
 A two-column dataframe
 }
 \description{
-`rev_recursive()` counts the number of functions that depend on each function in the package under review, taking the object of class `igraph` returned by `create_package_igraph()` as input
+`rev_recursive()` counts the number of functions that depend on each function in the package under review
 }
 \examples{
 \dontrun{
