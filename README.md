@@ -266,6 +266,11 @@ viridisMap TRUE  TRUE  TRUE TRUE      TRUE   TRUE
 ```
 
 In this example, the `n` argument doesn't have a consistent default value in all 5 functions where it's used.
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> save current status of files
 
 
 ### Review dependency usage
