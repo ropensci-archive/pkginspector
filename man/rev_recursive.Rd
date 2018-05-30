@@ -17,9 +17,11 @@ A two-column dataframe
 }
 \description{
 `rev_recursive()` counts the number of functions that depend on each function in the package under review
+
+#' @author Joyce Robbins \url{https://github.com/jtr13}
 }
 \examples{
 \dontrun{
-rev_recursive(igraph_obj)
+rev_recursive()
 }
 }
