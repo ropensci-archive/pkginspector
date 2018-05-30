@@ -1,5 +1,5 @@
 library(testthat)
-library(pkgreviewr)
+library(revtools)
 library(magrittr)
 
-test_check("pkgreviewr")
+test_check("revtools")
