@@ -32,7 +32,7 @@
 rev_args <- function(path = '.', exported_only = FALSE) {
 
     ## Get the functions from rev() and their exported status
-    degree_df <- pkgreviewr::rev_calls(path)
+    degree_df <- rev_calls(path)
 
     ## Subset if necessary and check that we have data to work with
     if(exported_only) degree_df <- degree_df[degree_df$exported, ]
