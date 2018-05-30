@@ -1,0 +1,11 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*Rproj
+dev/*
+.DS_Store
+assets/
+!vignettes/assets/
+!docs/articles/assets/
+inst/doc
