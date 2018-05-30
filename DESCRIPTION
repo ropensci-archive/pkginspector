@@ -4,7 +4,7 @@ Title: Package review tools
 Version: 0.0.1
 Authors@R: person("Sam", "Albers", email = "sam.albers@gmail.com",
                   role = c("aut","cre"))
-Description: Provides tools to facilitate an R package review
+Description: Provides tools to facilitate an R package review.
 License: MIT + file LICENSE
 URL: https://github.com/ropenscilabs/revtools
 BugReports: https://github.com/ropenscilabs/revtools/issues
@@ -24,14 +24,15 @@ Imports:
     magrittr,
     reprex,
     rstudioapi,
+    rmarkdown,
     tidyr,
     usethis,
+    utils,
     whoami
 Suggests: 
     corrplot,
     knitr,
     mockery,
-    rmarkdown,
     testthat
 VignetteBuilder: knitr
 Encoding: UTF-8

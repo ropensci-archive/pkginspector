@@ -79,7 +79,7 @@ rev_signature <- function(path = "."){
   package <- devtools::as.package(path)$package
   
   check_if_installed(package)
-  f_name <- unclass(lsf.str(envir = asNamespace(package), all = TRUE))
+  f_name <- unclass(utils::lsf.str(envir = asNamespace(package), all = TRUE))
   
   f_bare_args <- unlist(lapply(f_name, get_string_arguments, package = package))
   
