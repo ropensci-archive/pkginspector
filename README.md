@@ -1,30 +1,30 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) [![Travis build status](https://travis-ci.org/ropenscilabs/revtools.svg?branch=master)](https://travis-ci.org/ropenscilabs/revtools) [![codecov](https://codecov.io/gh/ropenscilabs/revtools/branch/master/graph/badge.svg)](https://codecov.io/gh/ropenscilabs/revtools)
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) [![Travis build status](https://travis-ci.org/ropenscilabs/pkginspector.svg?branch=master)](https://travis-ci.org/ropenscilabs/pkginspector) [![codecov](https://codecov.io/gh/ropenscilabs/pkginspector/branch/master/graph/badge.svg)](https://codecov.io/gh/ropenscilabs/pkginspector)
 
-revtools
-========
+pkginspector
+============
 
-The goal of revtools is to facilitate **rOpenSci** package reviews.
+The goal of pkginspector is to facilitate **rOpenSci** package reviews.
 
 Installation
 ------------
 
-You can install revtools from GitHub with:
+You can install pkginspector from GitHub with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("ropenscilabs/revtools")
-#> Downloading GitHub repo ropenscilabs/revtools@master
-#> from URL https://api.github.com/repos/ropenscilabs/revtools/zipball/master
-#> Installing revtools
+devtools::install_github("ropenscilabs/pkginspector")
+#> Downloading GitHub repo ropenscilabs/pkginspector@master
+#> from URL https://api.github.com/repos/ropenscilabs/pkginspector/zipball/master
+#> Installing pkginspector
 #> "C:/PROGRA~1/R/R-35~1.0/bin/x64/R" --no-site-file --no-environ --no-save  \
 #>   --no-restore --quiet CMD INSTALL  \
-#>   "C:/Users/boshek/AppData/Local/Temp/RtmpKeq2Mz/devtools216c693341ce/ropenscilabs-revtools-55113ea"  \
+#>   "C:/Users/boshek/AppData/Local/Temp/RtmpoxHZjn/devtools15bc5cd7779/ropenscilabs-pkginspector-a680ff0"  \
 #>   --library="C:/Users/boshek/Documents/R/win-library/3.5"  \
 #>   --install-tests
 #> 
-#> Installation failed: Command failed (1)
+#> Reloading installed pkginspector
 ```
 
 rOpenSci 2018: `pkgtests` branch
@@ -34,7 +34,7 @@ rOpenSci 2018: `pkgtests` branch
 
 ### Function calls
 
-We add functionality to analyze function dependencies within a package to `revtools` with `rev_fn_summary()`, which can be called on a package or on an class of `igraph` returned by `create_package_igraph()` in which functions are represented as nodes and function calls as directed edges.
+We add functionality to analyze function dependencies within a package to `pkginspector` with `rev_fn_summary()`, which can be called on a package or on an class of `igraph` returned by `create_package_igraph()` in which functions are represented as nodes and function calls as directed edges.
 
 `rev_fn_summary()` returns a data frame with the following columns:
 
@@ -48,10 +48,10 @@ We add functionality to analyze function dependencies within a package to `revto
 
 -   `all_called_by`: number of functions that depend on `f` (functions that directly or indirectly call `f`)
 
-For example, we run `rev_fn_summary()` on a default package (`viridisLite`) included with `revtools`:
+For example, we run `rev_fn_summary()` on a default package (`viridisLite`) included with `pkginspector`:
 
 ``` r
-res <- revtools::rev_fn_summary(params$pkgdir)
+res <- pkginspector::rev_fn_summary(params$pkgdir)
 ```
 
 | f\_args                                                                 |  called\_by|  calls| exported |  all\_called\_by|
@@ -78,7 +78,7 @@ Example code for running `rev_fn_summary()` on an external package (after downlo
 We introduced the `rev_args()` function that identifies all the arguments used in the functions of a given package and it's main feature is a logical vector indicating if the default value of the argument is consistent across all uses of the argument. The idea is that this information can be useful to a reviewer because it is a proxy of the complexity of the package and potential source of confusion to users. Maybe the package uses the same argument name for two completely different things. Or maybe it's a logical flag that sometimes is set to `TRUE` and others to `FALSE`.
 
 ``` r
-ra <- revtools::rev_args(params$pkgdir)$arg_df
+ra <- pkginspector::rev_args(params$pkgdir)$arg_df
 ```
 
 | arg\_name |  n\_functions| default\_consistent |  default\_consistent\_percent|
@@ -117,9 +117,9 @@ The function `rev_args(path = '.', exported_only = FALSE)` takes two arguments:
 > install.packages('viridisLite')
 
 ## Identify the location of the test version of viridisLite that's included
-> path <- system.file('viridisLite', package = 'revtools', mustWork = TRUE)
+> path <- system.file('viridisLite', package = 'pkginspector', mustWork = TRUE)
 
-## Run rev_args() on the example package viridisLite that is included in revtools
+## Run rev_args() on the example package viridisLite that is included in pkginspector
 > arg_info_exported <- rev_args(path = path, exported_only = TRUE)
 
 ## Explore the output
@@ -149,7 +149,7 @@ In this example, the `n` argument doesn't have a consistent default value in all
 New `rev_dependency_usage()` counts used functions from external packages.
 
 ``` r
-library(revtools)
+library(pkginspector)
 library(dplyr, warn.conflicts = FALSE)
 ```
 
@@ -168,7 +168,7 @@ as_tibble(arrange(n_deps, n))
 #>  4 functionMap     1 map_r_package                                        
 #>  5 gh              1 gh                                                   
 #>  6 magrittr        1 %>%                                                  
-#>  7 revtools      1 rev_calls                                            
+#>  7 pkginspector      1 rev_calls                                            
 #>  8 purrr           1 map                                                  
 #>  9 rmarkdown       1 render                                               
 #> 10 stats           1 setNames                                             
@@ -328,7 +328,7 @@ magrittr
 </tr>
 <tr class="even">
 <td style="text-align: left;">
-revtools
+pkginspector
 </td>
 <td style="text-align: right;">
 1

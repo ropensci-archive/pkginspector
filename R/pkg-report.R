@@ -17,7 +17,7 @@ pkg_report <- function(pkgdir = ".", output_file = NULL) {
   if(is.null(output_file)) {
     output_file <- file.path(paste0(pkgname, "-report.html"))
   }
-  render(system.file("package-report", "pkg-report.Rmd", package="revtools"),
+  render(system.file("package-report", "pkg-report.Rmd", package="pkginspector"),
          params = list(pkgdir = pkgdir),  output_file = output_file)
 
   return(output_file)
