@@ -1,5 +1,5 @@
 library(testthat)
-library(revtools)
+library(pkginspector)
 library(magrittr)
 
-test_check("revtools")
+test_check("pkginspector")

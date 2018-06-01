@@ -1,13 +1,13 @@
 Type: Package
-Package: revtools
+Package: pkginspector
 Title: Package review tools
 Version: 0.0.1
 Authors@R: person("Sam", "Albers", email = "sam.albers@gmail.com",
                   role = c("aut","cre"))
 Description: Provides tools to facilitate an R package review.
 License: MIT + file LICENSE
-URL: https://github.com/ropenscilabs/revtools
-BugReports: https://github.com/ropenscilabs/revtools/issues
+URL: https://github.com/ropenscilabs/pkginspector
+BugReports: https://github.com/ropenscilabs/pkginspector/issues
 Imports: 
     assertthat,
     base64enc,
