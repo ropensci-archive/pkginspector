@@ -10,6 +10,7 @@
 #' @return A two-column dataframe
 #'
 #' @export
+#' @importFrom magrittr %>%
 #'
 #' @examples
 #' \dontrun{
