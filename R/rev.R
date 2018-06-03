@@ -32,9 +32,9 @@ rev_fn_summary <- function(path = ".", igraph_obj = NULL){
 #' 
 #' @return A dataframe with the following columns:
 #' * f_name: function name 
-#' * called_by: number of other functions in the package that call this function directly
-#' * calls: number of other functions that are called by this function directly
-#' * exported: a boolean to indicate whether the function is exported or not
+#' * called_by: number of functions that directly depend on the function 
+#' * calls: number of functions directed called by the function 
+#' * exported: logical TRUE if the package exports the function
 #' @md
 #' 
 #' @export

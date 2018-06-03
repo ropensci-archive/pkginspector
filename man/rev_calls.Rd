@@ -16,9 +16,9 @@ or path to the folder of an R package.}
 A dataframe with the following columns:
 \itemize{
 \item f_name: function name
-\item called_by: number of other functions in the package that call this function directly
-\item calls: number of other functions that are called by this function directly
-\item exported: a boolean to indicate whether the function is exported or not
+\item called_by: number of functions that directly depend on the function
+\item calls: number of functions directed called by the function
+\item exported: logical TRUE if the package exports the function
 }
 }
 \description{
