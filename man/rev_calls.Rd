@@ -2,7 +2,7 @@
 % Please edit documentation in R/rev.R
 \name{rev_calls}
 \alias{rev_calls}
-\title{Create a dataframe of functions that a called and called by}
+\title{Create a dataframe of all functions in a package with the count of functions each one calls and called by}
 \usage{
 rev_calls(path = ".", igraph_obj = NULL)
 }
@@ -13,8 +13,14 @@ or path to the folder of an R package.}
 \item{igraph_obj}{igraph object for function calls dependencies returned by `create_package_igraph()`}
 }
 \value{
-A dataframe of functions in and used by the package and the number of times they are called and called by
+A dataframe with the following columns:
+\itemize{
+\item f_name: function name
+\item called_by: number of other functions in the package that call this function directly
+\item calls: number of other functions that are called by this function directly
+\item exported: a boolean to indicate whether the function is exported or not
+}
 }
 \description{
-Create a dataframe of all functions in and used by the package
+Create a dataframe of all functions in a package with the count of functions each one calls and called by
 }
