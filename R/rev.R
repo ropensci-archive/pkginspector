@@ -26,13 +26,16 @@ rev_fn_summary <- function(path = ".", igraph_obj = NULL){
   
 }
 
-#' Create a dataframe of functions that a called and called by
-#' 
-#' Create a dataframe of all functions in and used by the package
+#' Create a dataframe of all functions in a package with the count of functions each one calls and called by
 #' 
 #' @inheritParams rev_fn_summary
 #' 
-#' @return A dataframe of functions in and used by the package and the number of times they are called and called by
+#' @return A dataframe with the following columns:
+#' * f_name: function name 
+#' * called_by: number of functions that directly depend on the function 
+#' * calls: number of functions directed called by the function 
+#' * exported: logical TRUE if the package exports the function
+#' @md
 #' 
 #' @export
 
@@ -65,13 +68,14 @@ rev_calls <- function(path = ".", igraph_obj = NULL){
   return(degree_df)
 }
 
-#' Extract functions arguments of a package
-#' 
-#' Extracts function arguments of all functions in a package into a dataframe
+#' Extracts arguments of all functions in a package into a dataframe
 #' 
 #' @inheritParams rev_fn_summary
 #' 
-#' @return A dataframe of function names 
+#' @return A dataframe with the following columns:
+#' * f_name: function name
+#' * f_args: function arguements
+#' @md
 #' 
 #' @export
 rev_signature <- function(path = "."){

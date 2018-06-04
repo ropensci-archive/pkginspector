@@ -2,7 +2,7 @@
 % Please edit documentation in R/rev.R
 \name{rev_signature}
 \alias{rev_signature}
-\title{Extract functions arguments of a package}
+\title{Extracts arguments of all functions in a package into a dataframe}
 \usage{
 rev_signature(path = ".")
 }
@@ -11,8 +11,12 @@ rev_signature(path = ".")
 or path to the folder of an R package.}
 }
 \value{
-A dataframe of function names
+A dataframe with the following columns:
+\itemize{
+\item f_name: function name
+\item f_args: function arguements
+}
 }
 \description{
-Extracts function arguments of all functions in a package into a dataframe
+Extracts arguments of all functions in a package into a dataframe
 }
