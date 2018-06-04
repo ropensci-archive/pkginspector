@@ -17,8 +17,8 @@ You can install pkginspector from GitHub with:
 devtools::install_github("ropenscilabs/pkginspector")
 ```
 
-rOpenSci 2018: `pkgtests` branch
---------------------------------
+rOpenSci 2018: `pkginspector`
+-----------------------------
 
 [Sam Albers](https://twitter.com/big_bad_sam), [Leonardo Collado-Torres](https://twitter.com/fellgernon), [Mauro Lepore](https://twitter.com/mauro_lepore), [Joyce Robbins](https://twitter.com/jtrnyc), [Noam Ross](https://twitter.com/noamross), [Omayma Said](https://github.com/OmaymaS)
 
@@ -104,317 +104,54 @@ The function `rev_args(path = '.', exported_only = FALSE)` takes two arguments:
 
 ``` r
 ## Install viridisLite if needed
-> install.packages('viridisLite')
+install.packages('viridisLite')
+```
 
+``` r
 ## Identify the location of the test version of viridisLite that's included
-> path <- system.file('viridisLite', package = 'pkginspector', mustWork = TRUE)
+path <- system.file('viridisLite', package = 'pkginspector', mustWork = TRUE)
 
 ## Run rev_args() on the example package viridisLite that is included in pkginspector
-> arg_info_exported <- rev_args(path = path, exported_only = TRUE)
-
-## Explore the output
-> arg_info_exported
-$arg_df
-   arg_name n_functions default_consistent default_consistent_percent
-1         n           5              FALSE                         80
-2     alpha           5               TRUE                        100
-3     begin           5               TRUE                        100
-4       end           5               TRUE                        100
-5 direction           5               TRUE                        100
-6    option           2               TRUE                        100
-
-$arg_map
-              n alpha begin  end direction option
-cividis    TRUE  TRUE  TRUE TRUE      TRUE  FALSE
-magma      TRUE  TRUE  TRUE TRUE      TRUE  FALSE
-plasma     TRUE  TRUE  TRUE TRUE      TRUE  FALSE
-viridis    TRUE  TRUE  TRUE TRUE      TRUE   TRUE
-viridisMap TRUE  TRUE  TRUE TRUE      TRUE   TRUE
+pkginspector::rev_args(path = path, exported_only = TRUE)
+#> $arg_df
+#>    arg_name n_functions default_consistent default_consistent_percent
+#> 1         n           5              FALSE                         80
+#> 2     alpha           5               TRUE                        100
+#> 3     begin           5               TRUE                        100
+#> 4       end           5               TRUE                        100
+#> 5 direction           5               TRUE                        100
+#> 6    option           2               TRUE                        100
+#> 
+#> $arg_map
+#>               n alpha begin  end direction option
+#> cividis    TRUE  TRUE  TRUE TRUE      TRUE  FALSE
+#> magma      TRUE  TRUE  TRUE TRUE      TRUE  FALSE
+#> plasma     TRUE  TRUE  TRUE TRUE      TRUE  FALSE
+#> viridis    TRUE  TRUE  TRUE TRUE      TRUE   TRUE
+#> viridisMap TRUE  TRUE  TRUE TRUE      TRUE   TRUE
 ```
 
 In this example, the `n` argument doesn't have a consistent default value in all 5 functions where it's used.
 
 ### Review dependency usage
 
-New `rev_dependency_usage()` counts used functions from external packages.
+New `rev_dependency_usage()` counts used functions from external packages. You may want to remove dependency on packages from which you use few functions.
 
 ``` r
-library(pkginspector)
-library(dplyr, warn.conflicts = FALSE)
-```
-
-``` r
-n_deps <- rev_dependency_usage()
-
-# You may want to remove dependency on packages from which you use few functions
-# As tibble truncates `functions` so they use no more than a single line
-as_tibble(arrange(n_deps, n))
-#> # A tibble: 20 x 3
+pkginspector::rev_dependency_usage()
+#> # A tibble: 12 x 3
 #>    package         n functions                                            
 #>    <chr>       <int> <chr>                                                
 #>  1 ???             1 n                                                    
-#>  2 base64enc       1 base64decode                                         
-#>  3 devtools        1 as.package                                           
+#>  2 devtools        1 as.package                                           
+#>  3 dplyr           3 filter, group_by, summarize                          
 #>  4 functionMap     1 map_r_package                                        
-#>  5 gh              1 gh                                                   
+#>  5 igraph          6 degree, vertex_attr, V, ego, graph_from_data_frame, ~
 #>  6 magrittr        1 %>%                                                  
-#>  7 pkginspector      1 rev_calls                                            
-#>  8 purrr           1 map                                                  
-#>  9 rmarkdown       1 render                                               
-#> 10 stats           1 setNames                                             
-#> 11 tidyr           1 separate                                             
-#> 12 utils           1 lsf.str                                              
-#> 13 whoami          1 gh_username                                          
-#> 14 assertthat      2 assert_that, validate_that                           
-#> 15 dplyr           3 filter, group_by, summarize                          
-#> 16 httr            3 content, GET, http_error                             
-#> 17 rstudioapi      3 isAvailable, openProject, getVersion                 
-#> 18 usethis         5 create_project, use_template, use_git_hook, proj_get~
-#> 19 git2r           6 clone, init, status, add, commit, discover_repository
-#> 20 igraph          6 degree, vertex_attr, V, ego, graph_from_data_frame, ~
+#>  7 purrr           1 map                                                  
+#>  8 rmarkdown       1 render                                               
+#>  9 stats           1 setNames                                             
+#> 10 tidyr           1 separate                                             
+#> 11 usethis         1 proj_get                                             
+#> 12 utils           1 lsf.str
 ```
-
-`kable()` lets you see al functions even if they don't fit in a single line.
-
-``` r
-knitr::kable(n_deps)
-```
-
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: left;">
-package
-</th>
-<th style="text-align: right;">
-n
-</th>
-<th style="text-align: left;">
-functions
-</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">
-???
-</td>
-<td style="text-align: right;">
-1
-</td>
-<td style="text-align: left;">
-n
-</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">
-assertthat
-</td>
-<td style="text-align: right;">
-2
-</td>
-<td style="text-align: left;">
-assert\_that, validate\_that
-</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">
-base64enc
-</td>
-<td style="text-align: right;">
-1
-</td>
-<td style="text-align: left;">
-base64decode
-</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">
-devtools
-</td>
-<td style="text-align: right;">
-1
-</td>
-<td style="text-align: left;">
-as.package
-</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">
-dplyr
-</td>
-<td style="text-align: right;">
-3
-</td>
-<td style="text-align: left;">
-filter, group\_by, summarize
-</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">
-functionMap
-</td>
-<td style="text-align: right;">
-1
-</td>
-<td style="text-align: left;">
-map\_r\_package
-</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">
-gh
-</td>
-<td style="text-align: right;">
-1
-</td>
-<td style="text-align: left;">
-gh
-</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">
-git2r
-</td>
-<td style="text-align: right;">
-6
-</td>
-<td style="text-align: left;">
-clone, init, status, add, commit, discover\_repository
-</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">
-httr
-</td>
-<td style="text-align: right;">
-3
-</td>
-<td style="text-align: left;">
-content, GET, http\_error
-</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">
-igraph
-</td>
-<td style="text-align: right;">
-6
-</td>
-<td style="text-align: left;">
-degree, vertex\_attr, V, ego, graph\_from\_data\_frame, set\_vertex\_attr
-</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">
-magrittr
-</td>
-<td style="text-align: right;">
-1
-</td>
-<td style="text-align: left;">
-%&gt;%
-</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">
-pkginspector
-</td>
-<td style="text-align: right;">
-1
-</td>
-<td style="text-align: left;">
-rev\_calls
-</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">
-purrr
-</td>
-<td style="text-align: right;">
-1
-</td>
-<td style="text-align: left;">
-map
-</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">
-rmarkdown
-</td>
-<td style="text-align: right;">
-1
-</td>
-<td style="text-align: left;">
-render
-</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">
-rstudioapi
-</td>
-<td style="text-align: right;">
-3
-</td>
-<td style="text-align: left;">
-isAvailable, openProject, getVersion
-</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">
-stats
-</td>
-<td style="text-align: right;">
-1
-</td>
-<td style="text-align: left;">
-setNames
-</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">
-tidyr
-</td>
-<td style="text-align: right;">
-1
-</td>
-<td style="text-align: left;">
-separate
-</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">
-usethis
-</td>
-<td style="text-align: right;">
-5
-</td>
-<td style="text-align: left;">
-create\_project, use\_template, use\_git\_hook, proj\_get, use\_git\_ignore
-</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">
-utils
-</td>
-<td style="text-align: right;">
-1
-</td>
-<td style="text-align: left;">
-lsf.str
-</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">
-whoami
-</td>
-<td style="text-align: right;">
-1
-</td>
-<td style="text-align: left;">
-gh\_username
-</td>
-</tr>
-</tbody>
-</table>
-Created on 2018-05-22 by the [reprex package](http://reprex.tidyverse.org) (v0.2.0).
