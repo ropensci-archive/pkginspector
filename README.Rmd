@@ -37,13 +37,13 @@ The goal of pkginspector is to facilitate **rOpenSci** package reviews.
 You can install pkginspector from GitHub with:
 
 
-```{r}
+```{r, eval = FALSE}
 # install.packages("devtools")
 devtools::install_github("ropenscilabs/pkginspector")
 ```
 
 
-## rOpenSci 2018: `pkgtests` branch
+## rOpenSci 2018: `pkginspector`
 
 [Sam Albers](https://twitter.com/big_bad_sam), [Leonardo Collado-Torres](https://twitter.com/fellgernon), [Mauro Lepore](https://twitter.com/mauro_lepore), [Joyce Robbins](https://twitter.com/jtrnyc), [Noam Ross](https://twitter.com/noamross), [Omayma Said](https://github.com/OmaymaS)
 

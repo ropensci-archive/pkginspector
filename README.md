@@ -15,16 +15,6 @@ You can install pkginspector from GitHub with:
 ``` r
 # install.packages("devtools")
 devtools::install_github("ropenscilabs/pkginspector")
-#> Downloading GitHub repo ropenscilabs/pkginspector@master
-#> from URL https://api.github.com/repos/ropenscilabs/pkginspector/zipball/master
-#> Installing pkginspector
-#> "C:/PROGRA~1/R/R-35~1.0/bin/x64/R" --no-site-file --no-environ --no-save  \
-#>   --no-restore --quiet CMD INSTALL  \
-#>   "C:/Users/boshek/AppData/Local/Temp/RtmpoxHZjn/devtools15bc5cd7779/ropenscilabs-pkginspector-a680ff0"  \
-#>   --library="C:/Users/boshek/Documents/R/win-library/3.5"  \
-#>   --install-tests
-#> 
-#> Reloading installed pkginspector
 ```
 
 rOpenSci 2018: `pkgtests` branch
