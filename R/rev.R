@@ -15,7 +15,9 @@ rev_fn_summary <- function(path = ".", igraph_obj = NULL){
   ## get functions recursive calls
   rev_rec_res <- rev_recursive(path = path, igraph_obj = fn_igraph_obj)
   
-  rev_signature_res <- rev_signature(path = path)
+  package <- devtools::as.package(path)$package
+  
+  rev_signature_res <- rev_signature(package = package)
   
   ## merge results
   res <- merge(rev_calls_res, rev_rec_res, all.x = TRUE)
