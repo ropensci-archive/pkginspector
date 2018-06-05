@@ -60,6 +60,7 @@ vis_package <- function(dir, pkg_name) {
                                        hover = TRUE)) %>%
     visNetwork::visPhysics(solver = "barnesHut", 
                barnesHut = list(centralGravity = .75), stabilization = FALSE) %>% 
-    visNetwork::visLegend(width = .05, position = "right")
+    visNetwork::visLegend(width = .05, position = "right") %>% 
+    visNetwork::addFontAwesome()
 }
 
