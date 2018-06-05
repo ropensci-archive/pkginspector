@@ -61,7 +61,7 @@ We add functionality to analyze function dependencies within a package to `pkgin
   
   - `exported`: logical TRUE if the package exports `f`
   
-  - `all_called_by`: number of functions that depend on `f` (functions that directly or indirectly call `f`)
+  - `dependents`: number of functions that depend on `f` (functions that directly or indirectly call `f`)
   
   
   For example, we run `rev_fn_summary()` on a default package (`viridisLite`) included with `pkginspector`:
