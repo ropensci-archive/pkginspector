@@ -30,5 +30,5 @@ rev_recursive <- function(path = ".", igraph_obj = NULL) {
     data.frame() %>%
     stats::setNames("f_name") %>%
     dplyr::group_by(f_name) %>%
-    dplyr::summarize(all_called_by = n())
+    dplyr::summarize(dependents = n())
 }
