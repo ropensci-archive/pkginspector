@@ -23,7 +23,7 @@ rev_fn_summary <- function(path = ".", igraph_obj = NULL){
   res <- merge(rev_calls_res, rev_rec_res, all.x = TRUE)
   res <- merge(res, rev_signature_res, all.x = TRUE)
   res[is.na(res)] <- 0
-  
+
   res[,c("f_args","called_by","calls","exported","dependents")]
   
 }
@@ -93,7 +93,7 @@ rev_signature <- function(package){
   f_bare_args <- unlist(lapply(f_name, get_string_arguments, package = package))
   
   f_args <- paste0(f_name, " ", gsub("function ", "", f_bare_args))
-  data.frame(f_name, f_args)
+  dplyr::data_frame(f_name, f_args)
 }
 
 
