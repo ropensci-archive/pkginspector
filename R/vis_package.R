@@ -46,7 +46,7 @@ vis_package <- function(dir, pkg_name) {
   edges <- edge_df[c("from", "to")]
   
   # draw network
-  visNetwork::visNetwork(nodes, edges, width = "90%",
+  visNetwork::visNetwork(nodes, edges, width = "90%", height = "700px",
              main = paste("Function dependencies for", pkg_name)) %>% 
     visNetwork::visLayout(randomSeed = 2018) %>% 
     visNetwork::visGroups(groupname = "exported", shape = "icon", 
