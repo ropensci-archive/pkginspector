@@ -29,6 +29,7 @@ Imports:
     tidyr,
     usethis,
     utils,
+    visNetwork,
     whoami
 Suggests: 
     corrplot,
