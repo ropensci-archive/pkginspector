@@ -70,6 +70,9 @@ rev_calls <- function(path = ".", igraph_obj = NULL){
 
 #' Extracts arguments of all functions in a package into a dataframe
 #' 
+#' @details 
+#' The functions takes the name of an installed package
+#' 
 #' @inheritParams rev_fn_summary
 #' 
 #' @return A dataframe with the following columns:
@@ -77,20 +80,18 @@ rev_calls <- function(path = ".", igraph_obj = NULL){
 #' * f_args: function arguements
 #' @md
 #' 
+#' @examples 
+#' rev_signature(package = "graphics")
+#' 
 #' @export
-rev_signature <- function(path = "."){
-  ## Get the name of the package
-  package <- devtools::as.package(path)$package
-  
+rev_signature <- function(package){
   check_if_installed(package)
-  f_name <- unclass(utils::lsf.str(envir = asNamespace(package), all = TRUE))
   
+  f_name <- unclass(utils::lsf.str(envir = asNamespace(package), all = TRUE))
   f_bare_args <- unlist(lapply(f_name, get_string_arguments, package = package))
   
   f_args <- paste0(f_name, " ", gsub("function ", "", f_bare_args))
-  
   data.frame(f_name, f_args)
-  
 }
 
 

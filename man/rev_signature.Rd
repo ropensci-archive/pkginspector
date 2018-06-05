@@ -4,11 +4,7 @@
 \alias{rev_signature}
 \title{Extracts arguments of all functions in a package into a dataframe}
 \usage{
-rev_signature(path = ".")
-}
-\arguments{
-\item{path}{Name of a source R package tar archive file,
-or path to the folder of an R package.}
+rev_signature(package)
 }
 \value{
 A dataframe with the following columns:
@@ -19,4 +15,11 @@ A dataframe with the following columns:
 }
 \description{
 Extracts arguments of all functions in a package into a dataframe
+}
+\details{
+The functions takes the name of an installed package
+}
+\examples{
+rev_signature(package = "graphics")
+
 }
