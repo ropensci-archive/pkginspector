@@ -25,7 +25,7 @@ vis_package <- function(dir, pkg_name) {
   
   # get nodes, eliminate duplicates
   node_df <- mapped$node_df[mapped$node_df$own == TRUE,] %>% 
-    filter(!duplicated(ID))
+    dplyr::filter(!duplicated(ID))
   
   # get edges (and eliminated weird non-node stuff)
   edge_df <- mapped$edge_df[mapped$edge_df$to %in% unique(node_df$ID),]
@@ -36,7 +36,7 @@ vis_package <- function(dir, pkg_name) {
   # create data frame of nodes for visNetwork
   nodes <- data.frame(id = node_df$ID, 
                       exported = node_df$exported) %>% 
-    mutate(group = ifelse(exported, "exported", "not\nexported"),
+    dplyr::mutate(group = ifelse(exported, "exported", "not\nexported"),
            label = id,
            font = "24px arial")
   
