@@ -60,11 +60,11 @@ res <- pkginspector::rev_fn_summary(params$pkgdir)
 | f\_args                                                                 | called\_by | calls | exported | dependents |
 | :---------------------------------------------------------------------- | ---------: | ----: | :------- | ---------: |
 | cividis (n, alpha = 1, begin = 0, end = 1, direction = 1)               |          0 |     1 | TRUE     |          0 |
-| inferno (n, alpha = 1, begin = 0, end = 1, direction = 1)               |          0 |     1 | FALSE    |          0 |
+| inferno (n, alpha = 1, begin = 0, end = 1, direction = 1)               |          0 |     1 | TRUE     |          0 |
 | magma (n, alpha = 1, begin = 0, end = 1, direction = 1)                 |          0 |     1 | TRUE     |          0 |
 | plasma (n, alpha = 1, begin = 0, end = 1, direction = 1)                |          0 |     1 | TRUE     |          0 |
 | viridis (n, alpha = 1, begin = 0, end = 1, direction = 1, option = “D”) |          4 |     0 | TRUE     |          4 |
-| viridisMap (n = 256, alpha = 1, begin = 0, end = 1, direction = 1,      |          0 |     0 | TRUE     |          0 |
+| viridisMap (n = 256, alpha = 1, begin = 0, end = 1, direction = 1,      |          0 |     0 | FALSE    |          0 |
 
 Note that in order to run `rev_fn_summary()`, the prebuilt package files
 must exist locally. For packages that exist on GitHub, the easiest way
@@ -150,20 +150,20 @@ path <- system.file('viridisLite', package = 'pkginspector', mustWork = TRUE)
 pkginspector::rev_args(path = path, exported_only = TRUE)
 #> $arg_df
 #>    arg_name n_functions default_consistent default_consistent_percent
-#> 1         n           5              FALSE                         80
+#> 1         n           5               TRUE                        100
 #> 2     alpha           5               TRUE                        100
 #> 3     begin           5               TRUE                        100
 #> 4       end           5               TRUE                        100
 #> 5 direction           5               TRUE                        100
-#> 6    option           2               TRUE                        100
+#> 6    option           1               TRUE                        100
 #> 
 #> $arg_map
-#>               n alpha begin  end direction option
-#> cividis    TRUE  TRUE  TRUE TRUE      TRUE  FALSE
-#> magma      TRUE  TRUE  TRUE TRUE      TRUE  FALSE
-#> plasma     TRUE  TRUE  TRUE TRUE      TRUE  FALSE
-#> viridis    TRUE  TRUE  TRUE TRUE      TRUE   TRUE
-#> viridisMap TRUE  TRUE  TRUE TRUE      TRUE   TRUE
+#>            n alpha begin  end direction option
+#> cividis TRUE  TRUE  TRUE TRUE      TRUE  FALSE
+#> inferno TRUE  TRUE  TRUE TRUE      TRUE  FALSE
+#> magma   TRUE  TRUE  TRUE TRUE      TRUE  FALSE
+#> plasma  TRUE  TRUE  TRUE TRUE      TRUE  FALSE
+#> viridis TRUE  TRUE  TRUE TRUE      TRUE   TRUE
 ```
 
 In this example, the `n` argument doesn’t have a consistent default
@@ -182,7 +182,7 @@ pkginspector::rev_dependency_usage()
 #>    <chr>       <int> <chr>                                                
 #>  1 ???             1 n                                                    
 #>  2 devtools        1 as.package                                           
-#>  3 dplyr           4 filter, group_by, summarize, mutate                  
+#>  3 dplyr           5 filter, group_by, summarize, data_frame, mutate      
 #>  4 functionMap     1 map_r_package                                        
 #>  5 igraph          6 V, ego, degree, vertex_attr, graph_from_data_frame, …
 #>  6 magrittr        1 %>%                                                  
@@ -192,5 +192,5 @@ pkginspector::rev_dependency_usage()
 #> 10 tidyr           1 separate                                             
 #> 11 usethis         1 proj_get                                             
 #> 12 utils           1 lsf.str                                              
-#> 13 visNetwork      7 visNetwork, visLayout, visGroups, visEdges, visOptio…
+#> 13 visNetwork      8 visNetwork, visLayout, visGroups, visEdges, visOptio…
 ```
