@@ -9,6 +9,7 @@
 rev_fn_summary <- function(path = ".", igraph_obj = NULL){
   
   fn_igraph_obj <- create_package_igraph(path = path)
+  
   ## get functions direct calls/called by count
   rev_calls_res <- rev_calls(path = path, igraph_obj = fn_igraph_obj)
   
@@ -16,16 +17,23 @@ rev_fn_summary <- function(path = ".", igraph_obj = NULL){
   rev_rec_res <- rev_recursive(path = path, igraph_obj = fn_igraph_obj)
   
   package <- devtools::as.package(path)$package
-  
-  rev_signature_res <- rev_signature(package = package)
+
   
   ## merge results
   res <- merge(rev_calls_res, rev_rec_res, all.x = TRUE)
-  res <- merge(res, rev_signature_res, all.x = TRUE)
-  res[is.na(res)] <- 0
+  res[is.na(res)] <- 0  # rows with no dependents
 
-  res[,c("f_args","called_by","calls","exported","dependents")]
+  ##  if packaged is installed, get and merge function arguments
   
+  if (requireNamespace(package, quietly = TRUE)) {
+    rev_signature_res <- rev_signature(package = package)
+    res <- merge(res, rev_signature_res, all.x = TRUE) %>% dplyr::select(f_name, f_args, calls, called_by, dependents)
+  } else {
+    message(c("Not including function arguments since\n", package, " is not installed."))
+  }
+  
+  res
+
 }
 
 #' Create a dataframe of all functions in a package with the count of functions each one calls and called by
@@ -46,8 +54,7 @@ rev_calls <- function(path = ".", igraph_obj = NULL){
   ## Get the name of the package
   package <- devtools::as.package(path)$package
   
-  
-  check_if_installed(package = package)
+  #check_if_installed(package = package) (not necessary here)
   
   if(is.null(igraph_obj)) igraph_obj <- create_package_igraph(path = path)
   
@@ -94,7 +101,7 @@ rev_calls <- function(path = ".", igraph_obj = NULL){
 #' 
 #' @export
 rev_signature <- function(package){
-  check_if_installed(package)
+  # check_if_installed(package) check before calling rev_signature
   
   f_name <- unclass(utils::lsf.str(envir = asNamespace(package), all = TRUE))
   f_bare_args <- unlist(lapply(f_name, get_string_arguments, package = package))
