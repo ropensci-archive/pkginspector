@@ -13,9 +13,14 @@ create_package_igraph <- function(path = ".", include_base = FALSE, directed = T
   
   mapped <- functionMap::map_r_package(path = path, include_base = include_base)
   
-  node_df <- mapped$node_df[mapped$node_df$own == TRUE,]
-  
+  if (external) {
+    node_df <- mapped$node_df
+  } else {
+    node_df <- mapped$node_df[mapped$node_df$own == TRUE,]
+  }
+
   edge_df <- mapped$edge_df[mapped$edge_df$to %in% unique(node_df$ID),]
+  
   edge_df <- edge_df[!duplicated(edge_df[,c('from','to')]),] ## include unique edges 
 
   unique_nodes <- node_df[!duplicated(node_df$ID),]
