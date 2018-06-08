@@ -1,8 +1,14 @@
 #' Draws a network showing function dependencies within a package
 #'
-#' @param dir directory where package code resides (this will be changed to a more sensible system)
-#'
-#' @param pkg_name name of package to be analyzed
+#' @param path  where package code resides (this will be changed to download package to a temporary directory)
+#' 
+#' @param centralGravity  controls how tightly nodes are pulled into the center of the network; higher numbers are more tight (default = .3)
+#' 
+#' @param external logical, if TRUE will include calls to functions external to the package (default = FALSE)
+#' 
+#' @param physics logical, if TRUE will recalculate network if a node is moved (default = FALSE)
+#' 
+#' @param overwrite logical, if TRUE igraph object will be created even if one exists already in data-raw for that package (this is a temporary solution for storing igraph objects to speed up the visualizations for commonly used packages)
 #'
 #' @author Joyce Robbins \url{https://github.com/jtr13}
 #'
@@ -15,50 +21,34 @@
 #' }
 #'
 
-
-
-
-
-vis_package <- function(path = ".", external = FALSE, centralGravity = NULL, recalc = FALSE, overwrite = TRUE) {
+vis_package <- function(path = ".", centralGravity = NULL, external = FALSE, physics = FALSE, overwrite = FALSE) {
 
   package <- devtools::as.package(path)$package
   
-  nodefile <- paste0("data-raw/", package, "nodes")
+  igraphfile <- paste0("~/pkginspector/data-raw/", package, "-igraph")
   
-  edgefile <- paste0("data-raw/", package, "edges")
-  
-  if (file.exists(nodefile) & file.exists(edgefile) &
-      (!overwrite)) {
-    load(nodefile)
-    load(edgefile)
+  if (file.exists(igraphfile) & (!overwrite)) {
+    load(igraphfile)
   } else {
-    
-    # get function dependencies
-    mapped <- functionMap::map_r_package(path = path)
-    
-    nodes <- get_nodes(mapped)
-    
-    num_nodes <- nrow(nodes)
-    
-    if (!external) nodes <- nodes %>% 
-      dplyr::filter(!external)
-    
-    edges <- get_edges(mapped) %>% 
-      dplyr::filter(from %in% nodes$id) %>% 
-      dplyr::filter(to %in% nodes$id)
-    
-    # save nodes and edges
-    
-    save(nodes, file = nodefile)
-    save(edges, file = edgefile)
-    
+    igraph_obj <- create_package_igraph(path = path, external = TRUE)
+    # save igraph object
+    save(igraph_obj, file = igraphfile)
   }
   
-  if(!recalc) {
+  if(!external) igraph_obj <- igraph::induced.subgraph(igraph_obj, 
+      which(igraph::V(igraph_obj)$own == TRUE))
+  
+  igraph::vertex_attr(igraph_obj, "group") <- ifelse(!igraph::V(igraph_obj)$own, "external", ifelse(igraph::V(igraph_obj)$exported, "exported", "not\nexported"))
+  
+  igraph::vertex_attr(igraph_obj, "font") <- "24px arial"
+    
+  num_nodes <- length(igraph_obj)
+  
+  if(!physics) {
     if (!is.null(centralGravity)) {
-      message("Ignoring centralGravity since recalc=FALSE") }
+      message("Ignoring centralGravity since physics=FALSE") }
   } else if (is.null(centralGravity)) {
-          centralGravity <- .75
+          centralGravity <- .3
   }
   
   colors <- list("not\nexported" = "#4995d0", # blue
@@ -73,28 +63,12 @@ vis_package <- function(path = ".", external = FALSE, centralGravity = NULL, rec
 
   # draw network
   
-  if (recalc) {
-    # use visNetwork for layout
-  
-    basic_layout <- 
-  visNetwork::visNetwork(nodes, edges, width = "90%", height = "700px",
-              main = paste("Function dependencies for", package)) %>% 
-      
-      visNetwork::visLayout(randomSeed = 2018) %>% 
-      
-      visNetwork::visPhysics(solver = "barnesHut", 
-                             barnesHut = list(centralGravity = centralGravity), stabilization = FALSE)
+  visNetwork::visIgraph(igraph_obj, physics = physics) %>% 
     
-    } else {
-                
-    # use igraph for layout
+    visNetwork::visPhysics(solver = "barnesHut", 
+                           barnesHut = list(centralGravity = centralGravity), 
+                           stabilization = FALSE) %>% 
     
-    g <- igraph::graph_from_data_frame(edges, directed = TRUE, vertices = nodes)
-  
-    basic_layout <- visNetwork::visIgraph(g)
-    }
-  
-  basic_layout %>% 
     visNetwork::visGroups(groupname = "not\nexported", 
                           shape = "icon",
                           icon = list(code = icons[["not\nexported"]],
@@ -123,36 +97,3 @@ vis_package <- function(path = ".", external = FALSE, centralGravity = NULL, rec
 }
   
 
-get_nodes <- function(mapped) {
-  
-  # get nodes, eliminate duplicates, eliminate "_"
-  
-  node_df <- mapped$node_df %>% 
-    dplyr::filter(!duplicated(ID)) %>% 
-    dplyr::filter(ID != "_") %>% 
-    dplyr::arrange(ID)
-  
-  # create data frame of nodes for visNetwork
-  data.frame(id = node_df$ID, 
-             exported = node_df$exported,
-             external = !node_df$own) %>% 
-    dplyr::mutate(group = ifelse(external, "external",
-                                 ifelse(exported, "exported", "not\nexported"))) %>% 
-    dplyr::mutate(label = id,
-                  font = "24px arial")
-  
-}
-
-get_edges <- function(mapped) {
-  
-  # get edges and eliminate weird non-node stuff
-  edge_df <- mapped$edge_df %>% 
-    filter(from != "_")
-  
-  # eliminate duplicate edges since they're not meaningful in this context
-  edge_df <- edge_df[!duplicated(edge_df[,c('from','to')]),] 
-  
-  # create data frame of edges for visNetwork
-  edge_df[c("from", "to")]
-  
-}
