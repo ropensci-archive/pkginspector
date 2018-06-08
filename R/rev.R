@@ -57,7 +57,7 @@ rev_fn_summary <- function(path = ".", igraph_obj = NULL){
 rev_calls <- function(path = ".", igraph_obj = NULL){
   
   ## Get the name of the package
-  package <- devtools::as.package(path)$package
+  # package <- devtools::as.package(path)$package
   
   #check_if_installed(package = package) (not necessary here)
   
