@@ -56,11 +56,6 @@ rev_fn_summary <- function(path = ".", igraph_obj = NULL){
 
 rev_calls <- function(path = ".", igraph_obj = NULL){
   
-  ## Get the name of the package
-  package <- devtools::as.package(path)$package
-  
-  #check_if_installed(package = package) (not necessary here)
-  
   if(is.null(igraph_obj)) igraph_obj <- create_package_igraph(path = path)
   
   ## 'Called by' data
