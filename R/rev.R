@@ -55,7 +55,7 @@ rev_fn_summary <- function(path = ".", igraph_obj = NULL){
 #' @export
 
 rev_calls <- function(path = ".", igraph_obj = NULL){
-  
+
   if(is.null(igraph_obj)) igraph_obj <- create_package_igraph(path = path)
   
   ## 'Called by' data
