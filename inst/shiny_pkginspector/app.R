@@ -6,8 +6,7 @@ ui <- fluidPage(
     
     titlePanel("Function Dependency Explorer"),
     
-    p("Note: This is very rudimentary but it does work. The \"Can\'t find \'\'\" error message will disappear when you choose a package."),
-    p("Large packages will take time to render and rerender."),
+    p("This is very rudimentary but it does work. Be aware that large packages may take some time to render and rerender."),
     p("To try a different package, refresh the app. (At the moment you can only choose a package location once.)"),
     
     shinyDirButton('directory', 'Choose package location', 'Please select a folder'),
@@ -38,16 +37,20 @@ server <- function(input, output) {
 
     output$directorypath <- renderPrint({parseDirPath(c(home='~'), input$directory)})
     
-    output$network <- 
-        
-        renderVisNetwork({
+    network <- eventReactive(input$directory, {
             
         path <- renderText({parseDirPath(c(home='~'), input$directory)})    
             
-            
         pkginspector::vis_package(path(),
                                   physics = !input$freeze, external = input$external, centralGravity = input$centralGravity)
-            })
+        })
+    
+    output$network <- 
+        
+        visNetwork::renderVisNetwork({
+            network()
+        })
+    
 
 }
 
