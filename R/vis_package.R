@@ -21,19 +21,12 @@
 #' }
 #'
 
-vis_package <- function(path = ".", centralGravity = NULL, external = FALSE, physics = FALSE, overwrite = FALSE) {
+vis_package <- function(path = ".", centralGravity = NULL, external = FALSE, physics = FALSE) {
 
   package <- devtools::as.package(path)$package
   
-  igraphfile <- paste0("~/pkginspector/data-raw/", package, "-igraph")
-  
-  if (file.exists(igraphfile) & (!overwrite)) {
-    load(igraphfile)
-  } else {
-    igraph_obj <- create_package_igraph(path = path, external = TRUE)
-    # save igraph object
-    save(igraph_obj, file = igraphfile)
-  }
+
+  igraph_obj <- create_package_igraph(path = path, external = TRUE)
   
   if(!external) igraph_obj <- igraph::induced.subgraph(igraph_obj, 
       which(igraph::V(igraph_obj)$own == TRUE))
@@ -68,6 +61,8 @@ vis_package <- function(path = ".", centralGravity = NULL, external = FALSE, phy
     visNetwork::visPhysics(solver = "barnesHut", 
                            barnesHut = list(centralGravity = centralGravity), 
                            stabilization = FALSE) %>% 
+    
+    visNetwork::visLayout(randomSeed = 2018) %>% 
     
     visNetwork::visGroups(groupname = "not\nexported", 
                           shape = "icon",
