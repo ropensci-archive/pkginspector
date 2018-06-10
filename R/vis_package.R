@@ -8,7 +8,6 @@
 #' 
 #' @param physics logical, if TRUE will recalculate network if a node is moved (default = FALSE)
 #' 
-#' @param overwrite logical, if TRUE igraph object will be created even if one exists already in data-raw for that package (this is a temporary solution for storing igraph objects to speed up the visualizations for commonly used packages)
 #'
 #' @author Joyce Robbins \url{https://github.com/jtr13}
 #'
