@@ -28,6 +28,7 @@ ui <- fluidPage(
         h4("Notes: "),
         p("* When plot renders, hover, click, or choose a function from the dropdown box to see reverse function dependencies. Right click in browser to save image."),
         p("* Large packages may take a minute or more to load."),
+        p("* Misses functions called in purrr::map statements and similar (to be fixed)"),
         p("* For more info on rendering function, see:"),
         a("http://rpubs.com/jtr13/vis_package", href = "http://rpubs.com/jtr13/vis_package", target = "_blank")
         
