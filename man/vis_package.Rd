@@ -4,12 +4,19 @@
 \alias{vis_package}
 \title{Draws a network showing function dependencies within a package}
 \usage{
-vis_package(dir, pkg_name)
+vis_package(path = ".", centralGravity = 0.3, external = FALSE,
+  physics = FALSE, icons = TRUE)
 }
 \arguments{
-\item{dir}{directory where package code resides (this will be changed to a more sensible system)}
+\item{path}{where package code resides (this will be changed to download package to a temporary directory)}
 
-\item{pkg_name}{name of package to be analyzed}
+\item{centralGravity}{controls how tightly nodes are pulled into the center of the network; higher numbers are more tight (default = .3)}
+
+\item{external}{logical, if TRUE will include calls to functions external to the package (default = FALSE)}
+
+\item{physics}{logical, if TRUE will recalculate network if a node is moved (default = FALSE)}
+
+\item{icons}{logical, if TRUE will use font awesome icons, set to FALSE for shiny app (default = TRUE)}
 }
 \description{
 Draws a network showing function dependencies within a package

@@ -8,6 +8,8 @@
 #' 
 #' @param physics logical, if TRUE will recalculate network if a node is moved (default = FALSE)
 #' 
+#' @param icons logical, if TRUE will use font awesome icons, set to FALSE for shiny app (default = TRUE)
+#' 
 #'
 #' @author Joyce Robbins \url{https://github.com/jtr13}
 #'
@@ -20,7 +22,7 @@
 #' }
 #'
 
-vis_package <- function(path = ".", centralGravity = NULL, external = FALSE, physics = FALSE) {
+vis_package <- function(path = ".", centralGravity = .3, external = FALSE, physics = FALSE, icons = TRUE) {
 
   package <- devtools::as.package(path)$package
   
@@ -36,47 +38,34 @@ vis_package <- function(path = ".", centralGravity = NULL, external = FALSE, phy
     
   num_nodes <- length(igraph_obj)
   
-  if(!physics) {
-    if (!is.null(centralGravity)) {
-      message("Ignoring centralGravity since physics=FALSE") }
-  } else if (is.null(centralGravity)) {
-          centralGravity <- .3
-  }
+  # if(!physics) {
+  #   if (!is.null(centralGravity)) {
+  #     message("Ignoring centralGravity since physics=FALSE") }
+  # } else if (is.null(centralGravity)) {
+  #         centralGravity <- .3
+  # }
   
-  colors <- list("not\nexported" = "#4995d0", # blue
+  colorlist <- list("not\nexported" = "#4995d0", # blue
                  "exported" = "#ff7600",      # orange
                  "external" = "#2caa58")      # green
   
-  icons <- list("not\nexported" = "f013",  # "cog"
+  iconlist <- list("not\nexported" = "f013",  # "cog"
                 "exported" = "f072",       # "plane"       
                 "external" = "f090")       # "sign-in"
+  
+  size <- 15
   
   # get icon codes here: https://fontawesome.com/v4.7.0/icons/
 
   # draw network
   
-  visNetwork::visIgraph(igraph_obj, physics = physics) %>% 
+netvis <- visNetwork::visIgraph(igraph_obj, physics = physics) %>% 
     
     visNetwork::visPhysics(solver = "barnesHut", 
                            barnesHut = list(centralGravity = centralGravity), 
                            stabilization = FALSE) %>% 
     
     visNetwork::visLayout(randomSeed = 2018) %>% 
-    
-    visNetwork::visGroups(groupname = "not\nexported", 
-                          shape = "icon",
-                          icon = list(code = icons[["not\nexported"]],
-                                      color = colors[["not\nexported"]])) %>%
-    
-    visNetwork::visGroups(groupname = "exported", 
-                          shape = "icon",
-                          icon = list(code = icons[["exported"]],
-                                      color = colors[["exported"]])) %>%
-    
-    visNetwork::visGroups(groupname = "external", 
-                          shape = "icon",
-                          icon = list(code = icons[["external"]],
-                                      color = colors[["external"]])) %>%
 
     visNetwork::visEdges(arrows = "to") %>% 
     
@@ -85,9 +74,49 @@ vis_package <- function(path = ".", centralGravity = NULL, external = FALSE, phy
                                        algorithm = "hierarchical",
                                        hover = TRUE), nodesIdSelection = TRUE) %>%
     
-    visNetwork::visLegend(width = .05, position = "right") %>% 
-    
-    visNetwork::addFontAwesome()
+    visNetwork::visLegend(width = .1, position = "right")
+
+
+
+    if (icons) {
+      
+      netvis %>%
+        
+        visNetwork::visGroups(groupname = "not\nexported", 
+                            shape = "icon",
+                            icon = list(code = iconlist[["not\nexported"]], 
+                                        color = colorlist[["not\nexported"]])) %>%
+        visNetwork::visGroups(groupname = "exported",
+                              shape = "icon",
+                              icon = list(code = iconlist[["exported"]],
+                                          color = colorlist[["exported"]])) %>%
+        visNetwork::visGroups(groupname = "external", 
+                              shape = "icon",
+                              icon = list(code = iconlist[["external"]],
+                                          color = colorlist[["external"]])) %>%
+        
+        visNetwork::addFontAwesome()
+      
+    } else {
+netvis %>% 
+  
+  visNetwork::visGroups(groupname = "not\nexported", 
+                        color = colorlist[["not\nexported"]],
+                        size = size,
+                        shape = "dot") %>%
+  
+  visNetwork::visGroups(groupname = "exported", 
+                        color = colorlist[["exported"]],
+                        size = size,
+                        shape = "triangle") %>%
+  
+  visNetwork::visGroups(groupname = "external", 
+                        color = colorlist[["external"]],
+                        size = size,
+                        shape = "square") 
+
+    }
+
 }
   
 

@@ -4,54 +4,71 @@ library(visNetwork)
 
 ui <- fluidPage(
     
+    sidebarLayout(
+        
+        sidebarPanel(
+            
+            h4("Select package location:"),
+            
+            shinyDirButton('directory', 'Choose folder', 'Please select a folder', buttonType = "success"), br(), 
+            br(),
+        
+        checkboxInput("freeze", "Freeze non-selected nodes", TRUE),
+        
+        checkboxInput("external", "Include external functions", FALSE),
+        
+        conditionalPanel(condition = "input.freeze == false",
+                         sliderInput("centralGravity",
+                                     "centralGravity:",
+                                     min = 0,
+                                     max = 1,
+                                     value = .3)
+                         ),
+        
+        h4("Notes: "),
+        p("* When plot renders, hover, click, or choose a function from the dropdown box to see reverse function dependencies. Right click in browser to save image."),
+        p("* Large packages may take a minute or more to load."),
+        p("* For more info on rendering function, see:"),
+        a("http://rpubs.com/jtr13/vis_package", href = "http://rpubs.com/jtr13/vis_package", target = "_blank")
+        
+        ),
+            
+        mainPanel(
+    
     titlePanel("Function Dependency Explorer"),
     
-    p("This is very rudimentary but it does work. Be aware that large packages may take some time to render and rerender."),
-    p("To try a different package, refresh the app. (At the moment you can only choose a package location once.)"),
+    p("Package location:"),
     
-    shinyDirButton('directory', 'Choose package location', 'Please select a folder'),
-
-    checkboxInput("freeze", "Freeze non-selected nodes", FALSE),
-    
-    checkboxInput("external", "Include external functions", FALSE),
-    
-    conditionalPanel(condition = "input.freeze == false",
-                     sliderInput("centralGravity",
-                                 "centralGravity:",
-                                 min = 0,
-                                 max = 1,
-                                 value = .3)
-                     ),
-    
-    h4("Package location:"),
-    
-    verbatimTextOutput('directorypath'),
+    verbatimTextOutput('directorypath'), 
     
     visNetworkOutput("network")
-    
+        )
+    )
 )
 
 server <- function(input, output) {
     
-    shinyDirChoose(input, 'directory', roots = c(home = '~'))
+    volumes <- shinyFiles::getVolumes()
+    
+    shinyDirChoose(input, 'directory', roots = volumes)
 
-    output$directorypath <- renderPrint({parseDirPath(c(home='~'), input$directory)})
+    output$directorypath <- renderPrint({parseDirPath(volumes, input$directory)})
+
     
-    network <- eventReactive(input$directory, {
+    observeEvent(input$directory, {
             
-        path <- renderText({parseDirPath(c(home='~'), input$directory)})    
+        path <- renderText({parseDirPath(volumes, input$directory)})    
             
-        pkginspector::vis_package(path(),
-                                  physics = !input$freeze, external = input$external, centralGravity = input$centralGravity)
-        })
-    
-    output$network <- 
+        output$network <- renderVisNetwork({
+            
+            pkginspector::vis_package(path(),
+                                  physics = !input$freeze, external = input$external, centralGravity = input$centralGravity, icons = FALSE)
         
-        visNetwork::renderVisNetwork({
-            network()
         })
+        
+    })
     
-
+    
 }
 
 # Run the application 

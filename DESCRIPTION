@@ -35,6 +35,8 @@ Suggests:
     corrplot,
     knitr,
     mockery,
+    shiny,
+    shinyFiles,
     testthat
 VignetteBuilder: knitr
 Encoding: UTF-8

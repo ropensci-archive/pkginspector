@@ -31,14 +31,15 @@ create_package_igraph <- function(path = ".", include_base = FALSE, directed = T
 
   node_df <- node_df[order(node_df$ID),]
   
-# verify that "from" vertices are in node list  
+# verify that "to" vertices are in node list  
   edge_df <- mapped$edge_df[mapped$edge_df$to %in% node_df$ID,]
   
-# verify that "to vertices are in node list  
-  edge_df <- mapped$edge_df[mapped$edge_df$from %in% node_df$ID,]
+# verify that "from" vertices are in node list  
+  edge_df <- edge_df[edge_df$from %in% node_df$ID,]
 
 # eliminate duplicate edges    
   edge_df <- edge_df[!duplicated(edge_df[,c('from','to')]),] 
+  
   igraph_obj <- igraph::graph_from_data_frame(edge_df, directed = directed, vertices = node_df)
   
   igraph::set_vertex_attr(igraph_obj, "exported", value = node_df$exported)

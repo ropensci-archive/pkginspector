@@ -1,0 +1,13 @@
+name: shiny_pkginspector
+title: shiny_pkginspector
+username:
+account: joycerobbins
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 357847
+bundleId: 1430227
+url: https://joycerobbins.shinyapps.io/shiny_pkginspector/
+when: 1529006717.70668
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: apptest.R
