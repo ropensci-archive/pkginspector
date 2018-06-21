@@ -51,9 +51,9 @@ ui <- fluidPage(
 
 server <- function(input, output) {
   
-  # volumes <- shinyFiles::getVolumes()
+  volumes <- shinyFiles::getVolumes()
   
-  shinyDirChoose(input, 'directory')
+  shinyDirChoose(input, 'directory', roots = volumes)
   
   ## get package directory path 
   path <- eventReactive(input$directory, {
