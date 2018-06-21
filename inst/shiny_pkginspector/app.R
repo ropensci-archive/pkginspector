@@ -53,7 +53,9 @@ server <- function(input, output) {
     
     shinyDirChoose(input, 'directory', roots = volumes)
 
-    output$directorypath <- renderPrint({parseDirPath(volumes, input$directory)})
+    output$directorypath <- renderPrint({
+      req(input$directory)
+      parseDirPath(volumes, input$directory)})
 
     
     observeEvent(input$directory, {
