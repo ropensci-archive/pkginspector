@@ -2,6 +2,7 @@
 ^\.Rproj\.user$
 ^LICENSE\.md$
 ^README\.Rmd$
-^pkgreview\.md$
 ^\.travis\.yml$
 ^codecov\.yml$
+^inst/viridisLite
+data-raw
