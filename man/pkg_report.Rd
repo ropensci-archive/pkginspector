@@ -6,11 +6,15 @@
 \usage{
 pkg_report(pkgdir = ".", output_file = NULL)
 }
+\arguments{
+\item{pkgdir}{The path to the package}
+
+\item{output_file}{File to be outputted
+
+This may fail if there is no internet access for various reasons.}
+}
 \description{
 Creates an HTML report with various package summaries and diagnostics,
 designed for initial editor review of the package and as reference for
 authors and reviewers.
-}
-\details{
-This may fail if there is no internet access for various reasons.
 }

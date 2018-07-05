@@ -89,7 +89,7 @@ rev_calls <- function(path = ".", igraph_obj = NULL){
 #' @details 
 #' The functions takes the name of an installed package
 #' 
-#' @inheritParams rev_fn_summary
+#' @param package to be inspected
 #' 
 #' @return A dataframe with the following columns:
 #' * f_name: function name

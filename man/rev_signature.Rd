@@ -6,6 +6,9 @@
 \usage{
 rev_signature(package)
 }
+\arguments{
+\item{package}{to be inspected}
+}
 \value{
 A dataframe with the following columns:
 \itemize{

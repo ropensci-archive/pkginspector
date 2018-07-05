@@ -3,6 +3,9 @@
 #' Creates an HTML report with various package summaries and diagnostics,
 #' designed for initial editor review of the package and as reference for
 #' authors and reviewers.
+#' 
+#' @param pkgdir The path to the package
+#' @param output_file File to be outputted
 #'
 #' This may fail if there is no internet access for various reasons.
 #' @export
