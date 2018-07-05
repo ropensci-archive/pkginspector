@@ -47,7 +47,7 @@ rev_args <- function(path = '.', exported_only = FALSE) {
     # Based on formals() from the last answer in
     # https://stackoverflow.com/questions/11885207/get-all-parameters-as-list
     pkg_args <- lapply(degree_df$f_name, function(fun) {
-        .Internal(formals(get(fun, envir = asNamespace(pkg))))
+        formals(get(fun, envir = asNamespace(pkg)))
     })
     names(pkg_args) <- degree_df$f_name
 
