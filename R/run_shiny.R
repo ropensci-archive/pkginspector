@@ -10,6 +10,6 @@
 #' }
 #' }
 # modeled on https://github.com/ropenscilabs/roomba/blob/master/R/run_shiny.R
-shiny_inspect <- function(browse=TRUE){
-  shiny::runApp(system.file('shiny_pkginspector', package='pkginspector'), launch.browser = browse)
+shiny_inspect <- function(browse = TRUE) {
+  shiny::runApp(system.file("shiny_pkginspector", package = "pkginspector"), launch.browser = browse)
 }

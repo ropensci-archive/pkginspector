@@ -1,11 +1,11 @@
 # context("test-rev_args.R")
-# 
+#
 # ## viridisLite has to be installed
 # installed <- require("viridisLite")
 # if(!installed){
 #     install.packages('viridisLite')
 # }
-# 
+#
 # test_that("extract information for the arguments used in functions", {
 #     arg_info <- rev_args(system.file('viridisLite', package = 'pkginspector', mustWork = TRUE))
 #     arg_info_exported <- rev_args(system.file('viridisLite', package = 'pkginspector', mustWork = TRUE), exported_only = TRUE)
@@ -15,4 +15,4 @@
 #     expect_equal(rownames(arg_info_exported$arg_map), degree_df$f_name[degree_df$exported])
 #     expect_false(arg_info$arg_df$default_consistent[arg_info$arg_df$arg_name == 'n'])
 # })
-# 
+#

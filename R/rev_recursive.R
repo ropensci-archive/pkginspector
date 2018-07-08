@@ -16,9 +16,9 @@
 #' rev_recursive()
 #' }
 rev_recursive <- function(path = ".", igraph_obj = NULL) {
-
-  if(is.null(igraph_obj))
+  if (is.null(igraph_obj)) {
     igraph_obj <- create_package_igraph(path = path)
+  }
 
   order <- length(igraph::V(igraph_obj))
   function_list <- igraph::ego(igraph_obj, order = order, mode = "out", mindist = 1)
