@@ -1,3 +1,4 @@
+^\.github$
 ^inst/extdata/viridisLite/\.travis\.yml$
 ^inst/extdata/viridisLite/\.Rbuildignore$
 ^docs$
