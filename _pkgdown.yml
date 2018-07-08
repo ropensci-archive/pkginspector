@@ -1,0 +1,11 @@
+reference:
+
+  - title: Main summary functions
+    contents:
+      - rev_fn_summary
+      - vis_package
+
+  - title: All other functions
+    contents:
+      - -matches("rev_fn_summary")
+      - -matches("vis_package")

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extracts the default arguments and checks for consistency — rev_args • pkginspector</title>
+<title>pkginspector: Package review tools — pkginspector-package • pkginspector</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,13 +30,9 @@
 
 
 
-<meta property="og:title" content="Extracts the default arguments and checks for consistency — rev_args" />
+<meta property="og:title" content="pkginspector: Package review tools — pkginspector-package" />
 
-<meta property="og:description" content="From a package, get all the default arguments for the functions of said
-package. Then check how many times each argument is used and whether
-the default value for the argument is consistent across all functions
-where it's used. This function also returns a matrix indicating each function
-where the arguments are used." />
+<meta property="og:description" content="Provides tools to facilitate an R package review." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -104,70 +100,38 @@ where the arguments are used." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Extracts the default arguments and checks for consistency</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ropenscilabs/pkginspector/blob/master/R/rev_args.R'><code>R/rev_args.R</code></a></small>
-    <div class="hidden name"><code>rev_args.Rd</code></div>
+    <h1>pkginspector: Package review tools</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ropenscilabs/pkginspector/blob/master/R/pkginspector-package.R'><code>R/pkginspector-package.R</code></a></small>
+    <div class="hidden name"><code>pkginspector-package.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>From a package, get all the default arguments for the functions of said
-package. Then check how many times each argument is used and whether
-the default value for the argument is consistent across all functions
-where it's used. This function also returns a matrix indicating each function
-where the arguments are used.</p>
+    <p>Provides tools to facilitate an R package review.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>rev_args</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>exported_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>path</th>
-      <td><p>Name of a source R package tar archive file,
-or path to the folder of an R package.</p></td>
-    </tr>
-    <tr>
-      <th>exported_only</th>
-      <td><p>Logical. Whether to check only the exported functions
-or all the functions detected by <a href='rev_calls.html'>rev_calls</a>.
-or all the functions detected by <a href='rev_calls.html'>rev_calls</a>.</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+        
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>A two element list with <code>arg_df</code> and <code>arg_map</code>.
-The <code>arg_df</code> is a data.frame with one element per argument that
-has the name of the argument, the number of functions where it's used,
-whether the default is consistent across all functions and percent
-of consistency (based on the first appearance of the argument).
-<code>arg_map</code> is a logical matrix with the functions in the rows and the
-arguments in the columns. It specifies which functions use which arguments.</p>
+    <div class='dont-index'><p>Useful links:</p><ul>
+<li><p><a href='https://github.com/ropenscilabs/pkginspector'>https://github.com/ropenscilabs/pkginspector</a></p></li>
+<li><p>Report bugs at <a href='https://github.com/ropenscilabs/pkginspector/issues'>https://github.com/ropenscilabs/pkginspector/issues</a></p></li>
+</ul></div>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'>## If your current working directory is the home of a package, use:</span>
-<span class='fu'>rev_args</span>(<span class='st'>'.'</span>)
-<span class='co'># }</span><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+      <li><a href="#see-also">See also</a></li>
+          </ul>
 
     <h2>Author</h2>
     
-Leonardo Collado-Torres <a href='https://github.com/lcolladotor'>https://github.com/lcolladotor</a>
+<strong>Maintainer</strong>: Sam Albers <a href='mailto:sam.albers@gmail.com'>sam.albers@gmail.com</a>
+
 
   </div>
 </div>
