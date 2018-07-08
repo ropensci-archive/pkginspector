@@ -31,11 +31,8 @@ where it's used. This function also returns a matrix indicating each function
 where the arguments are used.
 }
 \examples{
-\dontrun{
-## If your current working directory is the home of a package, use:
-rev_args('.')
-}
-
+# TO inspect a package at your working directory use `path = "."`
+rev_args(pkginspector_example("viridisLite"))
 }
 \author{
 Leonardo Collado-Torres \url{https://github.com/lcolladotor}

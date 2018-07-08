@@ -41,11 +41,9 @@ knitr::kable(rev_fn_summary(path))
 ```
 
 ```{r rev_args}
-args <- rev_args(path)
-str(args, give.attr = FALSE)
-args$arg_df
+rev_args(path)
 
-corrplot::corrplot(args$arg_map, method = 'square', cl.pos = "n")
+corrplot::corrplot(rev_args(path)$arg_map, method = 'square', cl.pos = "n")
 ```
 
 ## Information

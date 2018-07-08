@@ -18,3 +18,6 @@ a table with package functions call summary
 \description{
 Return a table with package functions call summary
 }
+\examples{
+rev_fn_summary(pkginspector_example("viridisLite"))
+}

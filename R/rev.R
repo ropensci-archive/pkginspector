@@ -6,6 +6,8 @@
 #' @return a table with package functions call summary
 #' @export
 #'
+#' @examples
+#' rev_fn_summary(pkginspector_example("viridisLite"))
 rev_fn_summary <- function(path = ".", igraph_obj = NULL) {
   if (is.null(igraph_obj)) {
     fn_igraph_obj <- create_package_igraph(path = path)

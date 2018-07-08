@@ -149,11 +149,25 @@ arguments in the columns. It specifies which functions use which arguments.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'>## If your current working directory is the home of a package, use:</span>
-<span class='fu'>rev_args</span>(<span class='st'>'.'</span>)
-<span class='co'># }</span><div class='input'>
-</div></pre>
+    <pre class="examples"><div class='input'><span class='co'># TO inspect a package at your working directory use `path = "."`</span>
+<span class='fu'>rev_args</span>(<span class='fu'><a href='pkginspector_example.html'>pkginspector_example</a></span>(<span class='st'>"viridisLite"</span>))</div><div class='output co'>#&gt; $arg_df
+#&gt;    arg_name n_functions default_consistent default_consistent_percent
+#&gt; 1         n           6              FALSE                   83.33333
+#&gt; 2     alpha           6               TRUE                  100.00000
+#&gt; 3     begin           6               TRUE                  100.00000
+#&gt; 4       end           6               TRUE                  100.00000
+#&gt; 5 direction           6               TRUE                  100.00000
+#&gt; 6    option           2               TRUE                  100.00000
+#&gt; 
+#&gt; $arg_map
+#&gt;               n alpha begin  end direction option
+#&gt; cividis    TRUE  TRUE  TRUE TRUE      TRUE  FALSE
+#&gt; inferno    TRUE  TRUE  TRUE TRUE      TRUE  FALSE
+#&gt; magma      TRUE  TRUE  TRUE TRUE      TRUE  FALSE
+#&gt; plasma     TRUE  TRUE  TRUE TRUE      TRUE  FALSE
+#&gt; viridis    TRUE  TRUE  TRUE TRUE      TRUE   TRUE
+#&gt; viridisMap TRUE  TRUE  TRUE TRUE      TRUE   TRUE
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

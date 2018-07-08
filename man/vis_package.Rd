@@ -22,11 +22,8 @@ vis_package(path = ".", centralGravity = 0.3, external = FALSE,
 Draws a network showing function dependencies within a package
 }
 \examples{
-\dontrun{
-## Package code must exist locally:
-vis_package('~/Downloads/skimr')
-}
-
+# Package code must exist locally:
+vis_package(pkginspector_example("viridisLite"))
 }
 \author{
 Joyce Robbins \url{https://github.com/jtr13}

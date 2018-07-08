@@ -6,9 +6,7 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' rev_dependency_usage()
-#' }
+#' rev_dependency_usage(pkginspector_example("viridisLite"))
 rev_dependency_usage <- function(path = ".", include_base = FALSE) {
   if (identical(path, ".")) {
     path <- usethis::proj_get()

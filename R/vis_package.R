@@ -16,12 +16,8 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' ## Package code must exist locally:
-#' vis_package('~/Downloads/skimr')
-#' }
-#'
-
+#' # Package code must exist locally:
+#' vis_package(pkginspector_example("viridisLite"))
 vis_package <- function(path = ".", centralGravity = .3, external = FALSE, physics = FALSE, icons = TRUE) {
   package <- devtools::as.package(path)$package
 

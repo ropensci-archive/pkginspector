@@ -141,25 +141,26 @@
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">args &lt;-<span class="st"> </span><span class="kw"><a href="reference/rev_args.html">rev_args</a></span>(path)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">str</span>(args, <span class="dt">give.attr =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; List of 2</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt;  $ arg_df :'data.frame': 6 obs. of  4 variables:</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt;   ..$ arg_name                  : chr [1:6] "n" "alpha" "begin" "end" ...</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt;   ..$ n_functions               : num [1:6] 6 6 6 6 6 2</span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt;   ..$ default_consistent        : logi [1:6] FALSE TRUE TRUE TRUE TRUE TRUE</span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt;   ..$ default_consistent_percent: num [1:6] 83.3 100 100 100 100 ...</span></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt;  $ arg_map: logi [1:6, 1:6] TRUE TRUE TRUE TRUE TRUE TRUE ...</span></a>
-<a class="sourceLine" id="cb3-10" data-line-number="10">args<span class="op">$</span>arg_df</a>
-<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt;    arg_name n_functions default_consistent default_consistent_percent</span></a>
-<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt; 1         n           6              FALSE                   83.33333</span></a>
-<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt; 2     alpha           6               TRUE                  100.00000</span></a>
-<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt; 3     begin           6               TRUE                  100.00000</span></a>
-<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt; 4       end           6               TRUE                  100.00000</span></a>
-<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; 5 direction           6               TRUE                  100.00000</span></a>
-<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt; 6    option           2               TRUE                  100.00000</span></a>
-<a class="sourceLine" id="cb3-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb3-19" data-line-number="19">corrplot<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/corrplot/topics/corrplot">corrplot</a></span>(args<span class="op">$</span>arg_map, <span class="dt">method =</span> <span class="st">'square'</span>, <span class="dt">cl.pos =</span> <span class="st">"n"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="reference/rev_args.html">rev_args</a></span>(path)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt; $arg_df</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt;    arg_name n_functions default_consistent default_consistent_percent</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; 1         n           6              FALSE                   83.33333</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; 2     alpha           6               TRUE                  100.00000</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; 3     begin           6               TRUE                  100.00000</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; 4       end           6               TRUE                  100.00000</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt; 5 direction           6               TRUE                  100.00000</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt; 6    option           2               TRUE                  100.00000</span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt; $arg_map</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt;               n alpha begin  end direction option</span></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt; cividis    TRUE  TRUE  TRUE TRUE      TRUE  FALSE</span></a>
+<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt; inferno    TRUE  TRUE  TRUE TRUE      TRUE  FALSE</span></a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt; magma      TRUE  TRUE  TRUE TRUE      TRUE  FALSE</span></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; plasma     TRUE  TRUE  TRUE TRUE      TRUE  FALSE</span></a>
+<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt; viridis    TRUE  TRUE  TRUE TRUE      TRUE   TRUE</span></a>
+<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">#&gt; viridisMap TRUE  TRUE  TRUE TRUE      TRUE   TRUE</span></a>
+<a class="sourceLine" id="cb3-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb3-20" data-line-number="20">corrplot<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/corrplot/topics/corrplot">corrplot</a></span>(<span class="kw"><a href="reference/rev_args.html">rev_args</a></span>(path)<span class="op">$</span>arg_map, <span class="dt">method =</span> <span class="st">'square'</span>, <span class="dt">cl.pos =</span> <span class="st">"n"</span>)</a></code></pre></div>
 <p><img src="tools/readme/README-rev_args-1.png" width="700"></p>
 </div>
 <div id="information" class="section level2">

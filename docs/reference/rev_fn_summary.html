@@ -132,6 +132,28 @@ or path to the folder of an R package.</p></td>
     <p>a table with package functions call summary</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>rev_fn_summary</span>(<span class='fu'><a href='pkginspector_example.html'>pkginspector_example</a></span>(<span class='st'>"viridisLite"</span>))</div><div class='output co'>#&gt;       f_name
+#&gt; 1    cividis
+#&gt; 2    inferno
+#&gt; 3      magma
+#&gt; 4     plasma
+#&gt; 5    viridis
+#&gt; 6 viridisMap
+#&gt;                                                                     f_args
+#&gt; 1               cividis (n, alpha = 1, begin = 0, end = 1, direction = 1) 
+#&gt; 2               inferno (n, alpha = 1, begin = 0, end = 1, direction = 1) 
+#&gt; 3                 magma (n, alpha = 1, begin = 0, end = 1, direction = 1) 
+#&gt; 4                plasma (n, alpha = 1, begin = 0, end = 1, direction = 1) 
+#&gt; 5 viridis (n, alpha = 1, begin = 0, end = 1, direction = 1, option = "D") 
+#&gt; 6      viridisMap (n = 256, alpha = 1, begin = 0, end = 1, direction = 1, 
+#&gt;   calls called_by dependents
+#&gt; 1     1         0          0
+#&gt; 2     1         0          0
+#&gt; 3     1         0          0
+#&gt; 4     1         0          0
+#&gt; 5     0         4          4
+#&gt; 6     0         0          0</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -139,7 +161,9 @@ or path to the folder of an R package.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

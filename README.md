@@ -43,16 +43,8 @@ knitr::kable(rev_fn_summary(path))
 | viridisMap | viridisMap (n = 256, alpha = 1, begin = 0, end = 1, direction = 1,      |     0 |          0 |          0 |
 
 ``` r
-args <- rev_args(path)
-str(args, give.attr = FALSE)
-#> List of 2
-#>  $ arg_df :'data.frame': 6 obs. of  4 variables:
-#>   ..$ arg_name                  : chr [1:6] "n" "alpha" "begin" "end" ...
-#>   ..$ n_functions               : num [1:6] 6 6 6 6 6 2
-#>   ..$ default_consistent        : logi [1:6] FALSE TRUE TRUE TRUE TRUE TRUE
-#>   ..$ default_consistent_percent: num [1:6] 83.3 100 100 100 100 ...
-#>  $ arg_map: logi [1:6, 1:6] TRUE TRUE TRUE TRUE TRUE TRUE ...
-args$arg_df
+rev_args(path)
+#> $arg_df
 #>    arg_name n_functions default_consistent default_consistent_percent
 #> 1         n           6              FALSE                   83.33333
 #> 2     alpha           6               TRUE                  100.00000
@@ -60,8 +52,17 @@ args$arg_df
 #> 4       end           6               TRUE                  100.00000
 #> 5 direction           6               TRUE                  100.00000
 #> 6    option           2               TRUE                  100.00000
+#> 
+#> $arg_map
+#>               n alpha begin  end direction option
+#> cividis    TRUE  TRUE  TRUE TRUE      TRUE  FALSE
+#> inferno    TRUE  TRUE  TRUE TRUE      TRUE  FALSE
+#> magma      TRUE  TRUE  TRUE TRUE      TRUE  FALSE
+#> plasma     TRUE  TRUE  TRUE TRUE      TRUE  FALSE
+#> viridis    TRUE  TRUE  TRUE TRUE      TRUE   TRUE
+#> viridisMap TRUE  TRUE  TRUE TRUE      TRUE   TRUE
 
-corrplot::corrplot(args$arg_map, method = 'square', cl.pos = "n")
+corrplot::corrplot(rev_args(path)$arg_map, method = 'square', cl.pos = "n")
 ```
 
 ![](tools/readme/README-rev_args-1.png)<!-- -->
