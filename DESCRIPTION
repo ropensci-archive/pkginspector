@@ -30,7 +30,8 @@ Imports:
     usethis,
     utils,
     visNetwork,
-    whoami
+    whoami,
+    rlang
 Suggests: 
     corrplot,
     knitr,

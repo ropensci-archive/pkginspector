@@ -10,7 +10,6 @@
 #' @return A two-column dataframe
 #'
 #' @export
-#' @importFrom magrittr %>%
 #'
 #' @examples
 #' \dontrun{
@@ -29,6 +28,6 @@ rev_recursive <- function(path = ".", igraph_obj = NULL) {
     unlist() %>%
     data.frame() %>%
     stats::setNames("f_name") %>%
-    dplyr::group_by(f_name) %>%
-    dplyr::summarize(dependents = n())
+    dplyr::group_by(.data$f_name) %>%
+    dplyr::summarize(dependents = dplyr::n())
 }

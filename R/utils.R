@@ -56,4 +56,3 @@ get_string_arguments <- function(funcs, package){
   }
 }
 
-

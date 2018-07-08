@@ -16,11 +16,11 @@ rev_dependency_usage <- function(path = ".", include_base = FALSE) {
   
   map <- functionMap::map_r_package(path, include_base)$node_df
   map %>% 
-  dplyr::filter(!own) %>%
-  dplyr::filter(ID != "::") %>% 
-  tidyr::separate(ID, into = c("package", "fn"), sep = "::") %>% 
-  dplyr::group_by(package) %>% 
+  dplyr::filter(!.data$own) %>%
+  dplyr::filter(.data$ID != "::") %>% 
+  tidyr::separate(.data$ID, into = c("package", "fn"), sep = "::") %>% 
+  dplyr::group_by(.data$package) %>% 
   dplyr::summarize(
-    n = length(unique(fn)), functions = paste0(fn, collapse = ", ")
+    n = length(unique(.data$fn)), functions = paste0(.data$fn, collapse = ", ")
   )
 }

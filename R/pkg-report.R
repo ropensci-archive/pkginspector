@@ -9,8 +9,6 @@
 #'
 #' This may fail if there is no internet access for various reasons.
 #' @export
-#' @importFrom rmarkdown render
-#' @importFrom devtools as.package
 pkg_report <- function(pkgdir = ".", output_file = NULL) {
     ## Make an absolute path if it's not
     pkgdir <- normalizePath(pkgdir)

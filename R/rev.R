@@ -32,9 +32,15 @@ rev_fn_summary <- function(path = ".", igraph_obj = NULL){
   
   if (requireNamespace(package, quietly = TRUE)) {
     rev_signature_res <- rev_signature(package = package)
-    res <- merge(res, rev_signature_res, all.x = TRUE) %>% dplyr::select(f_name, f_args, calls, called_by, dependents)
+    res <- merge(res, rev_signature_res, all.x = TRUE) %>% 
+      dplyr::select(
+        .data$f_name, .data$f_args, .data$calls, .data$called_by, 
+        .data$dependents
+      )
   } else {
-    message(c("Not including function arguments since ", package, " is not installed"))
+    message(
+      c("Not including function arguments since ", package, " is not installed")
+    )
   }
   
   res
