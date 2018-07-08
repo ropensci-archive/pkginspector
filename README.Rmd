@@ -1,9 +1,5 @@
 ---
 output: github_document
-
-
-params:
-  pkgdir: !r system.file('viridisLite', package = 'pkginspector')
 ---
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 ```{r, echo = FALSE}
@@ -18,132 +14,41 @@ knitr::opts_chunk$set(
 [![Travis build status](https://travis-ci.org/ropenscilabs/pkginspector.svg?branch=master)](https://travis-ci.org/ropenscilabs/pkginspector)
 [![codecov](https://codecov.io/gh/ropenscilabs/pkginspector/branch/master/graph/badge.svg)](https://codecov.io/gh/ropenscilabs/pkginspector)
 
-```{r setup, echo = FALSE, message=FALSE}
-library(pkginspector)
-library(corrplot)
-library(dplyr)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
-
-
-
-# pkginspector
-
-The goal of pkginspector is to facilitate **rOpenSci** package reviews.
+The goal of pkginspector is to inspect and better understand the internal structure of an R package, with focus on facilitating package reviews and [**rOpenSci** onboarding](https://github.com/ropensci/onboarding).
 
 ## Installation
 
 You can install pkginspector from GitHub with:
 
-
-```{r, eval = FALSE}
+```R
 # install.packages("devtools")
 devtools::install_github("ropenscilabs/pkginspector")
 ```
 
+## Example
 
-## rOpenSci 2018: `pkginspector`
-
-[Sam Albers](https://twitter.com/big_bad_sam), [Leonardo Collado-Torres](https://twitter.com/fellgernon), [Mauro Lepore](https://twitter.com/mauro_lepore), [Joyce Robbins](https://twitter.com/jtrnyc), [Noam Ross](https://twitter.com/noamross), [Omayma Said](https://github.com/OmaymaS)
-
-### Function calls
-
-We add functionality to analyze function dependencies within a package to `pkginspector` with `rev_fn_summary()`, which can be called on a package or on an class of `igraph` returned by `create_package_igraph()` in which functions are represented as nodes and function calls as directed edges.
-
-`rev_fn_summary()` returns a data frame with the following columns:
-
-  - `f_args`: names of all package functions and default arguments
-
-  - `called_by`: number of functions that directly depend on `f`
-  
-  - `calls`: number of functions directed called by `f`
-  
-  - `exported`: logical TRUE if the package exports `f`
-  
-  - `dependents`: number of functions that depend on `f` (functions that directly or indirectly call `f`)
-  
-  
-  For example, we run `rev_fn_summary()` on a default package (`viridisLite`) included with `pkginspector`:
-
-```{r functions_calls, echo = TRUE, comment = "", message = FALSE}
-res <- pkginspector::rev_fn_summary(params$pkgdir)
-```
-
-```{r, echo = FALSE}
-knitr::kable(res)
-```
-
-Note that in order to run `rev_fn_summary()`, the prebuilt package files must exist locally.  For packages that exist on GitHub, the easiest way to get the files is to clone the repo that contains them.  Another method is to download and unzip the package source file, such as the one found here: `https://cran.r-project.org/src/contrib/skimr_1.0.2.tar.gz`
-
-The package must also be installed through traditional methods.
-
-Example code for running `rev_fn_summary()` on an external package (after downloading):
-
-```
-## Run rev_fn_summary() on the skimr package:
-> package_functions <- rev_fn_summary("~/Downloads/skimr")
-> package_functions
-```
-
-### Argument default usage
-
-We introduced the `rev_args()` function that identifies all the arguments used in the functions of a given package and it's main feature is a logical vector indicating if the default value of the argument is consistent across all uses of the argument. The idea is that this information can be useful to a reviewer because it is a proxy of the complexity of the package and potential source of confusion to users. Maybe the package uses the same argument name for two completely different things. Or maybe it's a logical flag that sometimes is set to `TRUE` and others to `FALSE`.
-
-```{r rev_args, echo = TRUE, comment = ""}
-ra <- pkginspector::rev_args(params$pkgdir)$arg_df
-```
-
-```{r, echo = FALSE}
-knitr::kable(ra)
-```
-
-The following plot visualizes which arguments are used in which functions.
-
-```{r rev_args_mat, echo = FALSE, comment = ""}
-corrplot::corrplot(pkginspector::rev_args(params$pkgdir)$arg_map, method = 'square', cl.pos = "n")
-```
-
-#### Details
-
-The function `rev_args(path = '.', exported_only = FALSE)` takes two arguments:
-
-* `path`: path to a package
-* `exported_only`: logical indicating whether to focus only on the exported functions or not.
-
-`rev_args()` returns a list with two elements:
-
-* `arg_df`: a data.frame with columns
-    - `arg_name`: name of the argument
-    - `n_functions`: number of functions where the argument is used
-    - `default_consistent`: logical, is the argument default value consistent across all usages
-    - `default_consistent_percent`: [0, 100] indicating how consistent the default usage is when compared against the first use of the argument.
-* `arg_map`: a logical matrix with function names in the rows, argument names in the columns. It indicates where each argument is used.
-
-#### Example output
-
-```{r, eval = FALSE}
-## Install viridisLite if needed
-install.packages('viridisLite')
-```
+The inspected package must be stored locally and installed.
 
 ```{r}
-## Identify the location of the test version of viridisLite that's included
-path <- system.file('viridisLite', package = 'pkginspector', mustWork = TRUE)
-
-## Run rev_args() on the example package viridisLite that is included in pkginspector
-pkginspector::rev_args(path = path, exported_only = TRUE)
+library(pkginspector)
 ```
 
-In this example, the `n` argument doesn't have a consistent default value in all 5 functions where it's used.
+```{r functions_calls}
+path <- pkginspector_example("viridisLite")
 
-
-### Review dependency usage
-
-New `rev_dependency_usage()` counts used functions from external packages. You may want to remove dependency on packages from which you use few functions. 
-
-```{r}
-pkginspector::rev_dependency_usage()
+knitr::kable(rev_fn_summary(path))
 ```
 
+```{r rev_args}
+args <- rev_args(path)
+str(args, give.attr = FALSE)
+
+args$arg_df
+
+corrplot::corrplot(args$arg_map, method = 'square', cl.pos = "n")
+```
 
