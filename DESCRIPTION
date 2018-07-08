@@ -1,7 +1,7 @@
 Type: Package
 Package: pkginspector
 Title: Package review tools
-Version: 0.0.1
+Version: 0.0.1.9000
 Authors@R: person("Sam", "Albers", email = "sam.albers@gmail.com",
                   role = c("aut","cre"))
 Description: Provides tools to facilitate an R package review.
