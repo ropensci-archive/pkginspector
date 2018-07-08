@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • pkginspector</title>
+<title>Get path to pkginspector example. — pkginspector_example • pkginspector</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,7 +30,11 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Get path to pkginspector example. — pkginspector_example" />
+
+<meta property="og:description" content="This function makes it easy to access the examples included in
+pkginspector." />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -46,7 +50,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -95,105 +99,52 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Get path to pkginspector example.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ropenscilabs/pkginspector/blob/master/R/pkginspector_example.R'><code>R/pkginspector_example.R</code></a></small>
+    <div class="hidden name"><code>pkginspector_example.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    
+    <p>This function makes it easy to access the examples included in
+<strong>pkginspector</strong>.</p>
+    
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
-
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-main-summary-functions" class="hasAnchor"><a href="#section-main-summary-functions" class="anchor"></a>Main summary functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="rev_fn_summary.html">rev_fn_summary()</a></code> </p>
-        </td>
-        <td><p>Return a table with package functions call summary</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="vis_package.html">vis_package()</a></code> </p>
-        </td>
-        <td><p>Draws a network showing function dependencies within a package</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-other-functions" class="hasAnchor"><a href="#section-all-other-functions" class="anchor"></a>All other functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="pkginspector_example.html">pkginspector_example()</a></code> </p>
-        </td>
-        <td><p>Get path to pkginspector example.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pkg_report.html">pkg_report()</a></code> </p>
-        </td>
-        <td><p>Produce a package diagnostics report</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rev_args.html">rev_args()</a></code> </p>
-        </td>
-        <td><p>Extracts the default arguments and checks for consistency</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rev_calls.html">rev_calls()</a></code> </p>
-        </td>
-        <td><p>Create a dataframe of all functions in a package with the count of functions each one calls and called by</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rev_dependency_usage.html">rev_dependency_usage()</a></code> </p>
-        </td>
-        <td><p>Review dependency usage: Count used functions from external packages.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rev_recursive.html">rev_recursive()</a></code> </p>
-        </td>
-        <td><p>Review recursive function calls</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rev_signature.html">rev_signature()</a></code> </p>
-        </td>
-        <td><p>Extracts arguments of all functions in a package into a dataframe</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="shiny_inspect.html">shiny_inspect()</a></code> </p>
-        </td>
-        <td><p>Run the pkginspector app</p></td>
-      </tr>
-    </tbody>
+    <pre class="usage"><span class='fu'>pkginspector_example</span>(<span class='no'>path</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>path</th>
+      <td><p>Path to example.</p></td>
+    </tr>
     </table>
-  </div>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>A character string giving an example's path.</p>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>path</span> <span class='kw'>&lt;-</span> <span class='fu'>pkginspector_example</span>(<span class='st'>"viridisLite"</span>)
+<span class='no'>path</span></div><div class='output co'>#&gt; [1] "C:/Users/LeporeM/Documents/Dropbox/git/pkginspector/inst/extdata/viridisLite"</div><div class='input'><span class='fu'>dir</span>(<span class='no'>path</span>)</div><div class='output co'>#&gt;  [1] "codecov.yml" "data"        "data-raw"    "DESCRIPTION" "Dockerfile" 
+#&gt;  [6] "LICENSE"     "man"         "NAMESPACE"   "R"           "README.md"  
+#&gt; [11] "tests"      </div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-main-summary-functions">Main summary functions</a></li>
-      <li><a href="#section-all-other-functions">All other functions</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
     </ul>
+
   </div>
 </div>
 

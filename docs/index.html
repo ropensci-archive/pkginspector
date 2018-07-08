@@ -72,10 +72,7 @@
     
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-<div id="pkginspector" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#pkginspector" class="anchor"></a>pkginspector</h1></div>
-<p>The goal of pkginspector is to facilitate <strong>rOpenSci</strong> package reviews.</p>
+<p>The goal of pkginspector is to inspect and better understand the internal structure of an R package, with focus on facilitating package reviews and <a href="https://github.com/ropensci/onboarding"><strong>rOpenSci</strong>’s onboarding</a>.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -83,25 +80,14 @@
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"ropenscilabs/pkginspector"</span>)</a></code></pre></div>
 </div>
-<div id="ropensci-2018-pkginspector" class="section level2">
+<div id="example" class="section level2">
 <h2 class="hasAnchor">
-<a href="#ropensci-2018-pkginspector" class="anchor"></a>rOpenSci 2018: <code>pkginspector</code>
-</h2>
-<p><a href="https://twitter.com/big_bad_sam">Sam Albers</a>, <a href="https://twitter.com/fellgernon">Leonardo Collado-Torres</a>, <a href="https://twitter.com/mauro_lepore">Mauro Lepore</a>, <a href="https://twitter.com/jtrnyc">Joyce Robbins</a>, <a href="https://twitter.com/noamross">Noam Ross</a>, <a href="https://github.com/OmaymaS">Omayma Said</a></p>
-<div id="function-calls" class="section level3">
-<h3 class="hasAnchor">
-<a href="#function-calls" class="anchor"></a>Function calls</h3>
-<p>We add functionality to analyze function dependencies within a package to <code>pkginspector</code> with <code><a href="reference/rev_fn_summary.html">rev_fn_summary()</a></code>, which can be called on a package or on an class of <code>igraph</code> returned by <code>create_package_igraph()</code> in which functions are represented as nodes and function calls as directed edges.</p>
-<p><code><a href="reference/rev_fn_summary.html">rev_fn_summary()</a></code> returns a data frame with the following columns:</p>
-<ul>
-<li><p><code>f_args</code>: names of all package functions and default arguments</p></li>
-<li><p><code>called_by</code>: number of functions that directly depend on <code>f</code></p></li>
-<li><p><code>calls</code>: number of functions directed called by <code>f</code></p></li>
-<li><p><code>exported</code>: logical TRUE if the package exports <code>f</code></p></li>
-<li><p><code>dependents</code>: number of functions that depend on <code>f</code> (functions that directly or indirectly call <code>f</code>)</p></li>
-</ul>
-<p>For example, we run <code><a href="reference/rev_fn_summary.html">rev_fn_summary()</a></code> on a default package (<code>viridisLite</code>) included with <code>pkginspector</code>:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">res &lt;-<span class="st"> </span>pkginspector<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/pkginspector/topics/rev_fn_summary">rev_fn_summary</a></span>(params<span class="op">$</span>pkgdir)</a></code></pre></div>
+<a href="#example" class="anchor"></a>Example</h2>
+<p>The inspected package must be stored locally and installed.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(pkginspector)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">path &lt;-<span class="st"> </span><span class="kw"><a href="reference/pkginspector_example.html">pkginspector_example</a></span>(<span class="st">"viridisLite"</span>)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">knitr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/knitr/topics/kable">kable</a></span>(<span class="kw"><a href="reference/rev_fn_summary.html">rev_fn_summary</a></span>(path))</a></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">f_name</th>
@@ -155,148 +141,27 @@
 </tr>
 </tbody>
 </table>
-<p>Note that in order to run <code><a href="reference/rev_fn_summary.html">rev_fn_summary()</a></code>, the prebuilt package files must exist locally. For packages that exist on GitHub, the easiest way to get the files is to clone the repo that contains them. Another method is to download and unzip the package source file, such as the one found here: <code>https://cran.r-project.org/src/contrib/skimr_1.0.2.tar.gz</code></p>
-<p>The package must also be installed through traditional methods.</p>
-<p>Example code for running <code><a href="reference/rev_fn_summary.html">rev_fn_summary()</a></code> on an external package (after downloading):</p>
-<pre><code>## Run rev_fn_summary() on the skimr package:
-&gt; package_functions &lt;- rev_fn_summary("~/Downloads/skimr")
-&gt; package_functions</code></pre>
-</div>
-<div id="argument-default-usage" class="section level3">
-<h3 class="hasAnchor">
-<a href="#argument-default-usage" class="anchor"></a>Argument default usage</h3>
-<p>We introduced the <code><a href="reference/rev_args.html">rev_args()</a></code> function that identifies all the arguments used in the functions of a given package and it’s main feature is a logical vector indicating if the default value of the argument is consistent across all uses of the argument. The idea is that this information can be useful to a reviewer because it is a proxy of the complexity of the package and potential source of confusion to users. Maybe the package uses the same argument name for two completely different things. Or maybe it’s a logical flag that sometimes is set to <code>TRUE</code> and others to <code>FALSE</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">ra &lt;-<span class="st"> </span>pkginspector<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/pkginspector/topics/rev_args">rev_args</a></span>(params<span class="op">$</span>pkgdir)<span class="op">$</span>arg_df</a></code></pre></div>
-<table class="table">
-<thead><tr class="header">
-<th align="left">arg_name</th>
-<th align="right">n_functions</th>
-<th align="left">default_consistent</th>
-<th align="right">default_consistent_percent</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">n</td>
-<td align="right">6</td>
-<td align="left">FALSE</td>
-<td align="right">83.33333</td>
-</tr>
-<tr class="even">
-<td align="left">alpha</td>
-<td align="right">6</td>
-<td align="left">TRUE</td>
-<td align="right">100.00000</td>
-</tr>
-<tr class="odd">
-<td align="left">begin</td>
-<td align="right">6</td>
-<td align="left">TRUE</td>
-<td align="right">100.00000</td>
-</tr>
-<tr class="even">
-<td align="left">end</td>
-<td align="right">6</td>
-<td align="left">TRUE</td>
-<td align="right">100.00000</td>
-</tr>
-<tr class="odd">
-<td align="left">direction</td>
-<td align="right">6</td>
-<td align="left">TRUE</td>
-<td align="right">100.00000</td>
-</tr>
-<tr class="even">
-<td align="left">option</td>
-<td align="right">2</td>
-<td align="left">TRUE</td>
-<td align="right">100.00000</td>
-</tr>
-</tbody>
-</table>
-<p>The following plot visualizes which arguments are used in which functions.</p>
-<p><img src="tools/readme/README-rev_args_mat-1.png" width="700"></p>
-<div id="details" class="section level4">
-<h4 class="hasAnchor">
-<a href="#details" class="anchor"></a>Details</h4>
-<p>The function <code><a href="reference/rev_args.html">rev_args(path = '.', exported_only = FALSE)</a></code> takes two arguments:</p>
-<ul>
-<li>
-<code>path</code>: path to a package</li>
-<li>
-<code>exported_only</code>: logical indicating whether to focus only on the exported functions or not.</li>
-</ul>
-<p><code><a href="reference/rev_args.html">rev_args()</a></code> returns a list with two elements:</p>
-<ul>
-<li>
-<code>arg_df</code>: a data.frame with columns
-<ul>
-<li>
-<code>arg_name</code>: name of the argument</li>
-<li>
-<code>n_functions</code>: number of functions where the argument is used</li>
-<li>
-<code>default_consistent</code>: logical, is the argument default value consistent across all usages</li>
-<li>
-<code>default_consistent_percent</code>: [0, 100] indicating how consistent the default usage is when compared against the first use of the argument.</li>
-</ul>
-</li>
-<li>
-<code>arg_map</code>: a logical matrix with function names in the rows, argument names in the columns. It indicates where each argument is used.</li>
-</ul>
-</div>
-<div id="example-output" class="section level4">
-<h4 class="hasAnchor">
-<a href="#example-output" class="anchor"></a>Example output</h4>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">## Install viridisLite if needed</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">install.packages</span>(<span class="st">'viridisLite'</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">## Identify the location of the test version of viridisLite that's included</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">path &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">'viridisLite'</span>, <span class="dt">package =</span> <span class="st">'pkginspector'</span>, <span class="dt">mustWork =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4">## Run rev_args() on the example package viridisLite that is included in pkginspector</a>
-<a class="sourceLine" id="cb6-5" data-line-number="5">pkginspector<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/pkginspector/topics/rev_args">rev_args</a></span>(<span class="dt">path =</span> path, <span class="dt">exported_only =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; $arg_df</span></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt;    arg_name n_functions default_consistent default_consistent_percent</span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; 1         n           5               TRUE                        100</span></a>
-<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; 2     alpha           5               TRUE                        100</span></a>
-<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt; 3     begin           5               TRUE                        100</span></a>
-<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt; 4       end           5               TRUE                        100</span></a>
-<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt; 5 direction           5               TRUE                        100</span></a>
-<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#&gt; 6    option           1               TRUE                        100</span></a>
-<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">#&gt; $arg_map</span></a>
-<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="co">#&gt;            n alpha begin  end direction option</span></a>
-<a class="sourceLine" id="cb6-17" data-line-number="17"><span class="co">#&gt; cividis TRUE  TRUE  TRUE TRUE      TRUE  FALSE</span></a>
-<a class="sourceLine" id="cb6-18" data-line-number="18"><span class="co">#&gt; inferno TRUE  TRUE  TRUE TRUE      TRUE  FALSE</span></a>
-<a class="sourceLine" id="cb6-19" data-line-number="19"><span class="co">#&gt; magma   TRUE  TRUE  TRUE TRUE      TRUE  FALSE</span></a>
-<a class="sourceLine" id="cb6-20" data-line-number="20"><span class="co">#&gt; plasma  TRUE  TRUE  TRUE TRUE      TRUE  FALSE</span></a>
-<a class="sourceLine" id="cb6-21" data-line-number="21"><span class="co">#&gt; viridis TRUE  TRUE  TRUE TRUE      TRUE   TRUE</span></a></code></pre></div>
-<p>In this example, the <code>n</code> argument doesn’t have a consistent default value in all 5 functions where it’s used.</p>
-</div>
-</div>
-<div id="review-dependency-usage" class="section level3">
-<h3 class="hasAnchor">
-<a href="#review-dependency-usage" class="anchor"></a>Review dependency usage</h3>
-<p>New <code><a href="reference/rev_dependency_usage.html">rev_dependency_usage()</a></code> counts used functions from external packages. You may want to remove dependency on packages from which you use few functions.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">pkginspector<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/pkginspector/topics/rev_dependency_usage">rev_dependency_usage</a></span>()</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; &lt;U+2714&gt; Changing active project to 'C:/Users/LeporeM/Documents/Dropbox/git/pkginspector'</span></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt; # A tibble: 13 x 3</span></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt;    package         n functions                                            </span></a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt;    &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;                                                </span></a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt;  1 devtools        1 as.package                                           </span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt;  2 dplyr           6 select, data_frame, filter, group_by, summarize, n   </span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt;  3 functionMap     1 map_r_package                                        </span></a>
-<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt;  4 igraph          7 degree, vertex_attr, V, ego, graph_from_data_frame, ~</span></a>
-<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt;  5 magrittr        1 %&gt;%                                                  </span></a>
-<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt;  6 purrr           1 map                                                  </span></a>
-<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt;  7 rmarkdown       1 render                                               </span></a>
-<a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co">#&gt;  8 shiny           1 runApp                                               </span></a>
-<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co">#&gt;  9 stats           1 setNames                                             </span></a>
-<a class="sourceLine" id="cb7-15" data-line-number="15"><span class="co">#&gt; 10 tidyr           1 separate                                             </span></a>
-<a class="sourceLine" id="cb7-16" data-line-number="16"><span class="co">#&gt; 11 usethis         1 proj_get                                             </span></a>
-<a class="sourceLine" id="cb7-17" data-line-number="17"><span class="co">#&gt; 12 utils           2 globalVariables, lsf.str                             </span></a>
-<a class="sourceLine" id="cb7-18" data-line-number="18"><span class="co">#&gt; 13 visNetwork      8 visIgraph, visPhysics, visLayout, visEdges, visOptio~</span></a></code></pre></div>
-</div>
-</div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">args &lt;-<span class="st"> </span><span class="kw"><a href="reference/rev_args.html">rev_args</a></span>(path)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">str</span>(args, <span class="dt">give.attr =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt; List of 2</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt;  $ arg_df :'data.frame': 6 obs. of  4 variables:</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt;   ..$ arg_name                  : chr [1:6] "n" "alpha" "begin" "end" ...</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt;   ..$ n_functions               : num [1:6] 6 6 6 6 6 2</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt;   ..$ default_consistent        : logi [1:6] FALSE TRUE TRUE TRUE TRUE TRUE</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt;   ..$ default_consistent_percent: num [1:6] 83.3 100 100 100 100 ...</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt;  $ arg_map: logi [1:6, 1:6] TRUE TRUE TRUE TRUE TRUE TRUE ...</span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11">args<span class="op">$</span>arg_df</a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt;    arg_name n_functions default_consistent default_consistent_percent</span></a>
+<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="co">#&gt; 1         n           6              FALSE                   83.33333</span></a>
+<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="co">#&gt; 2     alpha           6               TRUE                  100.00000</span></a>
+<a class="sourceLine" id="cb4-15" data-line-number="15"><span class="co">#&gt; 3     begin           6               TRUE                  100.00000</span></a>
+<a class="sourceLine" id="cb4-16" data-line-number="16"><span class="co">#&gt; 4       end           6               TRUE                  100.00000</span></a>
+<a class="sourceLine" id="cb4-17" data-line-number="17"><span class="co">#&gt; 5 direction           6               TRUE                  100.00000</span></a>
+<a class="sourceLine" id="cb4-18" data-line-number="18"><span class="co">#&gt; 6    option           2               TRUE                  100.00000</span></a>
+<a class="sourceLine" id="cb4-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb4-20" data-line-number="20">corrplot<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/corrplot/topics/corrplot">corrplot</a></span>(args<span class="op">$</span>arg_map, <span class="dt">method =</span> <span class="st">'square'</span>, <span class="dt">cl.pos =</span> <span class="st">"n"</span>)</a></code></pre></div>
+<p><img src="tools/readme/README-rev_args-1.png" width="700"></p>
 </div>
   </div>
 
