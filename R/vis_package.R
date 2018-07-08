@@ -11,7 +11,7 @@
 #' @param icons logical, if TRUE will use font awesome icons, set to FALSE for shiny app (default = TRUE)
 #' 
 #'
-#' @author Joyce Robbins \url{https://github.com/jtr13}
+#' @author Joyce Robbins <https://github.com/jtr13>
 #'
 #' @export
 #'

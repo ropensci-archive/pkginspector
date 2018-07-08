@@ -10,7 +10,7 @@ rev_fn_summary(path = ".", igraph_obj = NULL)
 \item{path}{Name of a source R package tar archive file,
 or path to the folder of an R package.}
 
-\item{igraph_obj}{igraph object for function calls dependencies returned by `create_package_igraph()`}
+\item{igraph_obj}{igraph object for function calls dependencies returned by \code{create_package_igraph()}}
 }
 \value{
 a table with package functions call summary

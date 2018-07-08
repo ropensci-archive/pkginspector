@@ -99,7 +99,7 @@ rev_calls <- function(path = ".", igraph_obj = NULL){
 #' 
 #' @return A dataframe with the following columns:
 #' * f_name: function name
-#' * f_args: function arguements
+#' * f_args: function arguments
 #' @md
 #' 
 #' @examples 

@@ -2,23 +2,24 @@
 #'
 #' From a package, get all the default arguments for the functions of said
 #' package. Then check how many times each argument is used and whether
-#' the default value for teh argument is consistent across all functions
+#' the default value for the argument is consistent across all functions
 #' where it's used. This function also returns a matrix indicating each function
 #' where the arguments are used.
 #'
 #' @inheritParams functionMap::map_r_package
 #' @param exported_only Logical. Whether to check only the exported functions
-#' or allt he functions detected by \link{rev_calls}.
+#' or all the functions detected by \link{rev_calls}.
+#' or all the functions detected by \link{rev_calls}.
 #'
-#' @return A two element list with \code{arg_df} and \code{arg_map}.
-#' The \code{arg_df} is a data.frame with one element per argument that
+#' @return A two element list with `arg_df` and `arg_map`.
+#' The `arg_df` is a data.frame with one element per argument that
 #' has the name of the argument, the number of functions where it's used,
 #' whether the default is consistent across all functions and percent
 #' of consistency (based on the first appearance of the argument).
-#' \code{arg_map} is a logical matrix with the functions in the rows and the
+#' `arg_map` is a logical matrix with the functions in the rows and the
 #' arguments in the columns. It specifies which functions use which arguments.
 #'
-#' @author Leonardo Collado-Torres \url{https://github.com/lcolladotor}
+#' @author Leonardo Collado-Torres <https://github.com/lcolladotor>
 #'
 #' @export
 #'

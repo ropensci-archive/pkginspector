@@ -3,7 +3,7 @@
 #' @description
 #' `rev_recursive()` counts the number of functions that depend on each function in the package under review
 #'
-#' #' @author Joyce Robbins \url{https://github.com/jtr13}
+#' #' @author Joyce Robbins <https://github.com/jtr13>
 #'
 #' @inheritParams  rev_fn_summary
 #'

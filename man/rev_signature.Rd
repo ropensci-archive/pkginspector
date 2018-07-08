@@ -13,7 +13,7 @@ rev_signature(package)
 A dataframe with the following columns:
 \itemize{
 \item f_name: function name
-\item f_args: function arguements
+\item f_args: function arguments
 }
 }
 \description{
