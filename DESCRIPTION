@@ -31,7 +31,8 @@ Imports:
     usethis,
     utils,
     visNetwork,
-    whoami
+    whoami,
+    viridisLite
 Suggests: 
     corrplot,
     knitr,
