@@ -21,17 +21,17 @@ Imports:
     here,
     httr,
     igraph,
-    purrr,
     magrittr,
+    purrr,
     reprex,
-    rstudioapi,
+    rlang,
     rmarkdown,
+    rstudioapi,
     tidyr,
     usethis,
     utils,
     visNetwork,
-    whoami,
-    rlang
+    whoami
 Suggests: 
     corrplot,
     knitr,
@@ -40,7 +40,8 @@ Suggests:
     shinyFiles,
     testthat
 VignetteBuilder: knitr
+Remotes: 
+    MangoTheCat/functionMap
 Encoding: UTF-8
 LazyData: true
-Remotes: MangoTheCat/functionMap
 RoxygenNote: 6.0.1
