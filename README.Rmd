@@ -33,22 +33,23 @@ devtools::install_github("ropenscilabs/pkginspector")
 
 The inspected package must be stored locally and installed.
 
-```{r}
+```{r rev_fn_summary}
 library(pkginspector)
-```
 
-```{r functions_calls}
 path <- pkginspector_example("viridisLite")
-
 knitr::kable(rev_fn_summary(path))
 ```
 
 ```{r rev_args}
 args <- rev_args(path)
 str(args, give.attr = FALSE)
-
 args$arg_df
 
 corrplot::corrplot(args$arg_map, method = 'square', cl.pos = "n")
 ```
 
+## Information
+
+* [Getting help](SUPPORT.md).
+* [Contributing](CONTRIBUTING.md).
+* [Contributor Code of Conduct](CODE_OF_CONDUCT.md).

@@ -26,11 +26,8 @@ The inspected package must be stored locally and installed.
 
 ``` r
 library(pkginspector)
-```
 
-``` r
 path <- pkginspector_example("viridisLite")
-
 knitr::kable(rev_fn_summary(path))
 #> Warning in ls.str(pos = pos, envir = envir, mode = "function", ...):
 #> partial argument match of 'all' to 'all.names'
@@ -55,7 +52,6 @@ str(args, give.attr = FALSE)
 #>   ..$ default_consistent        : logi [1:6] FALSE TRUE TRUE TRUE TRUE TRUE
 #>   ..$ default_consistent_percent: num [1:6] 83.3 100 100 100 100 ...
 #>  $ arg_map: logi [1:6, 1:6] TRUE TRUE TRUE TRUE TRUE TRUE ...
-
 args$arg_df
 #>    arg_name n_functions default_consistent default_consistent_percent
 #> 1         n           6              FALSE                   83.33333
@@ -69,3 +65,9 @@ corrplot::corrplot(args$arg_map, method = 'square', cl.pos = "n")
 ```
 
 ![](tools/readme/README-rev_args-1.png)<!-- -->
+
+## Information
+
+  - [Getting help](SUPPORT.md).
+  - [Contributing](CONTRIBUTING.md).
+  - [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
