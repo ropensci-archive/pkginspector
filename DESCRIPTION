@@ -1,7 +1,7 @@
 Type: Package
 Package: pkginspector
 Title: Package review tools
-Version: 0.0.1
+Version: 0.0.1.9000
 Authors@R: person("Sam", "Albers", email = "sam.albers@gmail.com",
                   role = c("aut","cre"))
 Description: Provides tools to facilitate an R package review.
@@ -21,16 +21,18 @@ Imports:
     here,
     httr,
     igraph,
-    purrr,
     magrittr,
+    purrr,
     reprex,
-    rstudioapi,
+    rlang,
     rmarkdown,
+    rstudioapi,
     tidyr,
     usethis,
     utils,
     visNetwork,
-    whoami
+    whoami,
+    viridisLite
 Suggests: 
     corrplot,
     knitr,
@@ -39,7 +41,9 @@ Suggests:
     shinyFiles,
     testthat
 VignetteBuilder: knitr
+Remotes: 
+    MangoTheCat/functionMap
 Encoding: UTF-8
 LazyData: true
-Remotes: MangoTheCat/functionMap
-RoxygenNote: 6.0.1
+RoxygenNote: 6.0.1.9000
+Roxygen: list(markdown = TRUE)

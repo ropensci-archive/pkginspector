@@ -20,7 +20,5 @@ A dataframe.
 Review dependency usage: Count used functions from external packages.
 }
 \examples{
-\dontrun{
-rev_dependency_usage()
-}
+rev_dependency_usage(pkginspector_example("viridisLite"))
 }

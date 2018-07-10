@@ -10,13 +10,13 @@ rev_recursive(path = ".", igraph_obj = NULL)
 \item{path}{Name of a source R package tar archive file,
 or path to the folder of an R package.}
 
-\item{igraph_obj}{igraph object for function calls dependencies returned by `create_package_igraph()`}
+\item{igraph_obj}{igraph object for function calls dependencies returned by \code{create_package_igraph()}}
 }
 \value{
 A two-column dataframe
 }
 \description{
-`rev_recursive()` counts the number of functions that depend on each function in the package under review
+\code{rev_recursive()} counts the number of functions that depend on each function in the package under review
 
 #' @author Joyce Robbins \url{https://github.com/jtr13}
 }

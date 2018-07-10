@@ -11,7 +11,8 @@ rev_args(path = ".", exported_only = FALSE)
 or path to the folder of an R package.}
 
 \item{exported_only}{Logical. Whether to check only the exported functions
-or allt he functions detected by \link{rev_calls}.}
+or all the functions detected by \link{rev_calls}.
+or all the functions detected by \link{rev_calls}.}
 }
 \value{
 A two element list with \code{arg_df} and \code{arg_map}.
@@ -25,16 +26,13 @@ arguments in the columns. It specifies which functions use which arguments.
 \description{
 From a package, get all the default arguments for the functions of said
 package. Then check how many times each argument is used and whether
-the default value for teh argument is consistent across all functions
+the default value for the argument is consistent across all functions
 where it's used. This function also returns a matrix indicating each function
 where the arguments are used.
 }
 \examples{
-\dontrun{
-## If your current working directory is the home of a package, use:
-rev_args('.')
-}
-
+# TO inspect a package at your working directory use `path = "."`
+rev_args(pkginspector_example("viridisLite"))
 }
 \author{
 Leonardo Collado-Torres \url{https://github.com/lcolladotor}
