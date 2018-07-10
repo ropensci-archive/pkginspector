@@ -65,7 +65,7 @@ rev_args(path)
 corrplot::corrplot(rev_args(path)$arg_map, method = 'square', cl.pos = "n")
 ```
 
-![](tools/readme/README-rev_args-1.png)<!-- -->
+![](man/figures/README-rev_args-1.png)<!-- -->
 
 ## Information
 
