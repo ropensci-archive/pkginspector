@@ -18,11 +18,13 @@
 #' @examples
 #' # Package code must exist locally:
 #' vis_package(pkginspector_example("viridisLite"))
-vis_package <- function(path = ".", centralGravity = .3, external = FALSE, physics = FALSE, icons = TRUE) {
+vis_package <- function(path = ".", igraph_obj = NULL, centralGravity = .3, external = FALSE, physics = FALSE, icons = TRUE) {
   package <- devtools::as.package(path)$package
 
-
-  igraph_obj <- create_package_igraph(path = path, external = TRUE)
+  if (is.null(igraph_obj)) {
+    igraph_obj <- create_package_igraph(path = path,
+                                        external = TRUE)
+    } 
 
   if (!external) {
     igraph_obj <- igraph::induced.subgraph(
